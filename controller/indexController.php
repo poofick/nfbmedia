@@ -99,6 +99,9 @@
 		
 		public function indexAction(){
 			
+			$groupModel = new groupModel();
+			$this->view->groups = functionsModel::array_fill_key($groupModel->find_all_by(), 'id');
+			
 		}
 		
 		public function updateprofileAction() {
@@ -150,6 +153,7 @@
 			
 			$messageModel = new messageModel();
 			$userModel = new userModel();
+			$emailModel = new emailModel();
 			
 			$messageValidator = $this->view->get_validator('message');
 			
@@ -177,6 +181,18 @@
 				$listMessagesDataContent = $this->view->render('data/listMessagesData', false, true);
 				
 				$result = array('success' => true, 'addMessageContent' => $addMessageContent, 'listMessagesDataContent' => $listMessagesDataContent);
+				
+				// send email
+				$userData = $userModel->find($data['recepient_user_id']);
+				$emailModel->send(array(
+					'subject' => 'Нове повідомлення',
+					'body' => $this->view->render('email/sendMessage', array(
+						'user_data' => $userData,
+						'subject' => $data['subject'],
+						'message' => $data['message']
+					), true),
+					'address' => array($userData['email'])
+				));
 			}
 			
 			return $result;
@@ -244,6 +260,8 @@
 			
 			switch($subPage) {
 				case 'my':
+						$this->view->conference_groups = functionsModel::array_fill_key($conferenceGroupModel->find_all_by(), 'id');
+						
 						$this->view->users = functionsModel::array_fill_key($userModel->find_all_by(), 'id');
 						$this->view->conferences = $conferenceModel->get_list('my', $this->login_data['id']);
 					break;
@@ -257,20 +275,32 @@
 					break;
 					
 				case 'current':
+						$this->view->conference_groups = functionsModel::array_fill_key($conferenceGroupModel->find_all_by(), 'id');
+						
 						$this->view->users = functionsModel::array_fill_key($userModel->find_all_by(), 'id');
 						$this->view->conferences = $conferenceModel->get_list('current', $this->login_data['id']);
 					break;	
 					
 				case 'history':
+						$this->view->conference_groups = functionsModel::array_fill_key($conferenceGroupModel->find_all_by(), 'id');
+						
 						$this->view->users = functionsModel::array_fill_key($userModel->find_all_by(), 'id');
 						$this->view->conferences = $conferenceModel->get_list('history', $this->login_data['id']);
 					break;	
 					
 				case 'conference':
-						if(($conference_id = ctype_digit($this->request->get_segment(4)) ? $this->request->get_segment(4) : false) && $conference = $conferenceModel->find($conference_id)) {
+						if(($conference_id = ctype_digit($this->request->get_segment(4)) ? $this->request->get_segment(4) : false) && ($conference = $conferenceModel->find($conference_id)) && ($conference['type'] == conferenceModel::CONFERENCE_TYPE_PUBLIC || ($conference['type'] == conferenceModel::CONFERENCE_TYPE_PRIVATE && in_array($this->login_data['id'], explode(',', $conference['invited_users']))))) {
 							$conference['attachments'] = $conferenceAttachmentModel->find_all_by(array('conference_id' => $conference_id));
-//							print_r($conference);
 							$this->view->conference = $conference;
+							
+							// related history
+							if($conference['status'] == conferenceModel::CONFERENCE_STATUS_OFF) {
+								$this->view->conference_groups = functionsModel::array_fill_key($conferenceGroupModel->find_all_by(), 'id');
+								$this->view->related_history_conferences = $conferenceModel->get_related_history($conference_id, $this->login_data['id'], $conference['group_id'], 10);
+							}
+							else { //participant_users ???
+								
+							}
 						}
 						else {
 							App::_404();
@@ -304,14 +334,15 @@
 			
 		}
 		
-		public function getmultimediastatusAction() {
+		public function getmultimediaconvertingstatusAction() {
 			
 			$conferenceModel = new conferenceModel();
 			
 			if($conference_id = ctype_digit($this->request->get_segment(3)) ? $this->request->get_segment(3) : false) {
 				$conferenceData = $conferenceModel->find($conference_id);
-				return array('success' => true, 'status' => $conferenceData['status']);
+				return array('success' => true, 'status' => $conferenceData['video_converting_status']);
 			}
+			
 		}
 		
 		public function addmultimediaAction() {
@@ -321,6 +352,7 @@
 			$conferenceModel = new conferenceModel();
 			$groupModel = new groupModel();
 			$userModel = new userModel();
+			$emailModel = new emailModel();
 			
 			$conferenceValidator = $this->view->get_validator('conference');
 			
@@ -348,6 +380,32 @@
 				
 				if($conference_id = $conferenceModel->add($data)) {
 					$result = array('success' => true);
+					
+					// send email
+					$data = $this->request->get('data');
+					
+					$invited_users = array();
+					if($data['type'] == conferenceModel::CONFERENCE_TYPE_PUBLIC) {
+						$user_ids = functionsModel::array_fill_key($userModel->find_all_by(false, array('id')), 'id');
+						unset($user_ids[$this->login_data['id']]);
+						$invited_users = array_keys($user_ids);
+					}
+					else {
+						$invited_users = $data['invited_users'];
+					}
+					
+					foreach($invited_users as $uid) {
+						$userData = $userModel->find($uid);
+						$emailModel->send(array(
+							'subject' => 'Запрошення на конференцію',
+							'body' => $this->view->render('email/createConference', array(
+								'type' => $data['type'],
+								'user_data' => $userData,
+								'conference_data' => $data
+							), true),
+							'address' => array($userData['email'])
+						));
+					}
 				}
 			}
 			
@@ -435,16 +493,25 @@
 			if(($conference_attach_id = ctype_digit($this->request->get_segment(3)) ? $this->request->get_segment(3) : false) && $conference_attach_data = $conferenceAttachmentModel->find($conference_attach_id)) {
 				if(@is_file($file = DOCROOT.'public/'.$conference_attach_data['url'])) {
 					$filename = $conference_attach_data['title'].'.'.pathinfo(basename($conference_attach_data['url']), PATHINFO_EXTENSION);
+					
+					if(strstr($_SERVER['HTTP_USER_AGENT'], 'MSIE')) {
+						$filename = mb_convert_encoding($filename, 'Windows-1251', 'UTF-8');
+					}
 		            
-		            header('Content-Type: application/octet-stream');
-		            header('Content-Disposition: attachment; filename="'.str_replace('"', '\'', $filename).'"');
+					header('HTTP/1.1 200 OK');
+		            header('Content-Type: application/force-download; charset=utf-8');
+		            header('Content-Length: '.filesize($file));
+		            header('Content-Description: File Transfer');
+		            header('Content-Disposition: attachment; filename="'.str_replace('"', '\'', ($filename)).'"');
 		            header('Content-Transfer-Encoding: binary');
-		       		
+		            
 		            @readfile($file);
+		            
+		            return false;
 				}
 			}
-            
-            return false;
+			
+			return App::_404();
 			
 		}
 		
@@ -524,6 +591,7 @@
 			
 			$groupModel = new groupModel();
 			$userModel = new userModel();
+			$emailModel = new emailModel();
 			
 			$userValidator = $this->view->get_validator('user');
 			
@@ -549,6 +617,13 @@
 				$listUsersDataContent = $this->view->render('data/listUsersData', false, true);
 				
 				$result = array('success' => true, 'addUserContent' => $addUserContent, 'listUsersDataContent' => $listUsersDataContent);
+				
+				// send email
+				$emailModel->send(array(
+					'subject' => 'Доданий новий користувач',
+					'body' => $this->view->render('email/addUser', array('user_data' => $data), true),
+					'address' => array($data['email'])
+				));
 			}
 			
 			return $result;

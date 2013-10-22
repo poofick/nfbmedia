@@ -30,7 +30,7 @@
 		public function dispatch($dispatch_data = array()) {
 			
 			$this->dispatched = true;
-
+			
 			if(!empty($dispatch_data)) {
 				// default dispatch data
 				$this->dispatch_data = $dispatch_data;

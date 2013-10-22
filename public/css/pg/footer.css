@@ -1,0 +1,88 @@
+.siteFooter{
+    height: 107px;
+
+    background-repeat: no-repeat;
+    background-color: #ffffff;
+    width: 960px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.tycoLogo {
+    background-image: url(/images/adt-findU-footer-logo.jpg);
+    height: 62px;
+    position: absolute;
+    right: -20px;
+    top: 35px;
+    width: 79px;
+
+}
+.navFooter {
+
+    color: #000000;
+    font-family: arial;
+    font-size: 10px;
+    width: 457px;
+
+}
+
+.siteFooter > .navFooter ul {
+    list-style-type: none;
+    padding-top: 34px;
+    padding-left: 0;
+    height:107px;
+}
+
+.siteFooter > .navFooter ul li {
+    padding-right: 10px;
+    display: inline-block;
+
+}
+
+.siteFooter > .navFooter ul li.active > a {
+    color: #000000;
+    text-decoration: underline
+
+}
+.siteFooter > .navFooter ul li > a {
+color: #000000 !important;}
+
+
+.appStoreLogoWrap{
+    position: absolute;
+    top: 61px;
+    left:-8px;
+
+}
+
+.androidLogo2 {
+    cursor: pointer;
+    background: url(../images/adt-findU-footer-app-stores-sprite-v2.png);
+    width:98px;
+    height:34px;
+    display: inline-block;
+}
+
+.blackLogo2 {
+    background: url(../images/adt-findU-footer-app-stores-sprite-v2.png) 206px 0px;
+    width:105px;
+    height: 34px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.windowsLogo2 {
+    background: url(../images/adt-findU-footer-app-stores-sprite-v2.png) 100px 0px;
+    width:100px;
+    height: 34px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.appleLogo2 {
+    background: url(../images/adt-findU-footer-app-stores-sprite-v2.png) 334px 0px;
+    width:136px;
+    height: 34px;
+    display: inline-block;
+    cursor: pointer;
+}

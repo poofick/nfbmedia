@@ -4,6 +4,7 @@
 <table class="table" cellpadding="0" cellspacing="0">
 	<tr>
 		<th>Назва</th>
+		<th>Група</th>
 		<th>Тривалість, хв</th>
 		<th>Початок</th>
 		<th>&nbsp;</th>
@@ -12,6 +13,7 @@
 		<?php foreach($this->conferences as $conference): ?>
 			<tr valign="top">
 				<td><?php echo $conference['title']; ?></td>
+				<td align="center"><?php echo isset($this->conference_groups[$conference['group_id']]) ? $this->conference_groups[$conference['group_id']]['title'] : ''; ?></td>
 				<!--<td>
 					<?php /* if($invited_users = $conference['invited_users'] ? explode(',', $conference['invited_users']) : array()): ?>
 						<?php foreach($invited_users as $user_id): ?>
@@ -24,10 +26,10 @@
 				<td align="center"><?php echo (strtotime($conference['estimated_end_time']) - strtotime($conference['estimated_start_time']))/60; ?></td>
 				<td align="center"><?php echo date('Y-m-d H:i', strtotime($conference['estimated_start_time'])); ?></td>
 				<td align="center">
-					<?php if(TIME >= strtotime($conference['estimated_start_time']) && TIME <= strtotime($conference['estimated_end_time'])): ?>
+					<?php if($conference['status'] != conferenceModel::CONFERENCE_STATUS_OFF && TIME >= strtotime($conference['estimated_start_time']) && TIME <= strtotime($conference['estimated_end_time'])): ?>
 						<input type="button" value="Приєднатися" class="button blue" onclick="document.location='<?php echo $this->build_url(array($this->controller, 'multimedia', 'conference', $conference['id'])); ?>'" /> <br />
-					<?php elseif(TIME > strtotime($conference['estimated_end_time'])): ?>		
-						<input type="button" value="Переглянути" class="button blue" onclick="document.location='<?php echo $this->build_url(array($this->controller, 'multimedia', 'conference', $conference['id'])); ?>'" /> <br />
+					<?php elseif($conference['status'] == conferenceModel::CONFERENCE_STATUS_OFF || TIME > strtotime($conference['estimated_end_time'])): ?>		
+						<input type="button" value="Переглянути" class="button magenta" onclick="document.location='<?php echo $this->build_url(array($this->controller, 'multimedia', 'conference', $conference['id'])); ?>'" /> <br />
 					<?php else: ?>			
 						<input type="button" value="Видалити" data-action="deleteEntity" data-confirm="Ви дійсно бажаєте видалити конференцію?" data-action-url="<?php echo $this->build_url(array($this->controller, 'deletemultimedia', $conference['id'])); ?>" data-success-redirect="<?php echo $this->build_url(array($this->controller, $this->action, 'my')); ?>" class="button mtop5 red" />
 					<?php endif; ?>
@@ -36,7 +38,7 @@
 		<?php endforeach; ?>
 	<?php else: ?>
 		<tr>
-			<td colspan="4" align="center">Не знайдено</td>
+			<td colspan="5" align="center">Не знайдено</td>
 		</tr>
 	<?php endif; ?>
 </table>

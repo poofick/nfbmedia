@@ -1,0 +1,1371 @@
+/* Structure */
+.siteWrapper {
+    width: 100%;
+    height: auto;
+    background-color: #0060ad;
+
+}
+
+.siteContainer {
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+    background-color: #ffffff;
+}
+
+.carouselA {
+    background: url(/images/adt-findU-header-carousel-general.jpg);
+
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+    background-color: #0060ad !important;
+}
+
+.carouselHome, .carouselHomeA {
+    background-image: url(/images/adt-findU-header-carousel-home.jpg);
+    position: relative;
+    width: 1280px;
+    height: 318px;
+    margin: 0 auto;
+
+}
+
+
+.homeWrapper {
+    width: 920px;
+    margin: 0 auto;
+
+}
+
+.carouselHow, .carouselGeneral {
+    /*  background: url(/images/adt-findU-header-carousel-general.jpg);*/
+    background-repeat: no-repeat;
+    width: 960px;
+    height: 467px;
+    margin: 0 auto;
+    position: relative;
+    display: table;
+
+}
+
+.carouselGeneral {
+    height: 236px;
+    background-position: center bottom;
+
+}
+
+.carouselGeneral > div {
+    display: table-cell;
+    vertical-align: middle;
+    /*  padding-left: 165px;*/
+
+}
+
+.carouselB {
+    width: 100%;
+    padding: 35px 0;
+    margin: 0 auto;
+    background: #c7c7ca; /* Old browsers */
+    background: -moz-linear-gradient(top, #c7c7ca 0%, #ebebec 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #c7c7ca), color-stop(100%, #ebebec)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #c7c7ca 0%, #ebebec 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #c7c7ca 0%, #ebebec 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #c7c7ca 0%, #ebebec 100%); /* IE10+ */
+    background: linear-gradient(to bottom, #c7c7ca 0%, #ebebec 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#c7c7ca', endColorstr = '#ebebec', GradientType = 0); /* IE6-9 */
+    display: table;
+
+}
+
+.carouselBHow {
+    width: 960px;
+    margin: 0 auto;
+    padding-top: 35px;
+}
+
+.carouselBAbout {
+    width: 896px;
+    margin: 0 auto;
+    padding-top: 35px;
+}
+
+.carouselForm {
+    height: auto !important;
+}
+
+.contactWrapper {
+    margin: 0 auto;
+    width: 1280px;
+}
+
+.carouselC {
+    width: 100%;
+    height: 153px;
+
+    background-color: #FFFFFF;
+}
+
+.scrollerWrapper {
+    height: 249px;
+    overflow: hidden;
+}
+
+.familyWrapper {
+    margin: 0 auto;
+    width: 920px;
+    background: url(/images/adt-findU-home-your-family.png);
+    background-position: left bottom;
+    background-repeat: no-repeat;
+    height: 125px;
+    position: relative;
+
+}
+
+.carouselCHow {
+    width: 100%;
+    height: 532px;
+    background: #a3a5a6; /* Old browsers */
+    /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2EzYTVhNiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjUwJSIgc3RvcC1jb2xvcj0iI2EwYTJhNSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiM5Mjk1OTYiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+    background: -moz-linear-gradient(top, #a3a5a6 0%, #a0a2a5 50%, #929596 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #a3a5a6), color-stop(50%, #a0a2a5), color-stop(100%, #929596)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #a3a5a6 0%, #a0a2a5 50%, #929596 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #a3a5a6 0%, #a0a2a5 50%, #929596 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #a3a5a6 0%, #a0a2a5 50%, #929596 100%); /* IE10+ */
+    background: linear-gradient(to bottom, #a3a5a6 0%, #a0a2a5 50%, #929596 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#a3a5a6', endColorstr = '#929596', GradientType = 0); /* IE6-8 */
+
+}
+
+.carouselD {
+    width: 100%;
+    height: 160px;
+    margin: 0 auto;
+    background-color: #0160a9;
+
+}
+
+
+
+.carouselContainer{
+    padding-top:60px;
+    margin: 0 auto;
+    position: relative;
+    width: 960px;  }
+
+
+
+.carouselGPS {
+    width: 100%;
+    height: 201px;
+    margin: 0 auto;
+    background-color: #ffffff;
+
+}
+
+.carouselNinty {
+
+    background-image: url("/images/adt-findU-footer-new-blue.jpg");
+    background-position: -17px 0;
+    background-repeat: no-repeat;
+    height: 160px;
+    margin: 0 auto;
+    position: relative;
+    width: 960px;
+
+}
+
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+
+}
+
+.inline {
+    display: inline;
+}
+
+.relative {
+    position: relative;
+
+}
+
+.scrollPanel {
+    width: 418px;
+    padding-right: 25px;
+    padding-left: 33px;
+}
+
+/*Typography*/
+a {
+    text-decoration: none;
+    color: #005fad;
+
+}
+
+p {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    line-height: 17px;
+
+}
+
+h1 {
+    font-size: 39px !important;
+    font-family: 'HelveticaW01-RoundedBd';
+    color: #ffffff;
+    padding-bottom: 0px !important;
+    margin: 0 !important;
+    font-weight: normal !important;
+
+}
+
+h2 {
+    color: #696b75;
+    font-family: 'HelveticaW01-RoundedBd';
+    font-weight: normal !important;
+    font-size: 25px;
+    margin: 0 !important;
+    padding: 0 !important;
+
+}
+
+h2.blue {
+    color: #005fa9;
+    font: helvetica;
+    font-weight: normal !important;
+    font-size: 25px;
+    margin: 0;
+    padding: 0;
+
+}
+
+h3 {
+    color: #ffaf00;
+    font-family: 'Arial W10 Rounded Bold';
+
+    font-size: 17px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    font-weight: normal !important;
+
+}
+
+h3.contact {
+    font-size: 24px !important;
+}
+
+h5 {
+
+    font-weight: bold;
+    font-size: 16px;
+    color: #ffffff;
+
+}
+
+.arialRound {
+
+    font-family: 'Arial W10 Rounded Bold';
+}
+
+.white {
+    color: #ffffff;
+}
+
+.blue {
+    color: #005fa9;
+}
+
+.upper {
+    text-transform: uppercase;
+}
+
+.yellow {
+    color: #ffaf00;
+}
+
+.grey {
+    color: #696b75 !important;
+}
+
+.black {
+    color: #000000;
+
+}
+
+.noBackground {
+    background: none !important;
+}
+
+.noBold {
+    font-weight: normal !important;
+    font-size: 12PX;
+    margin-left: 20px;
+    position: absolute;
+    top: 178px;
+    font-family: arial;
+}
+
+.underline {
+    text-decoration: underline !important;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.noMargin {
+    margin: 0px !important;
+}
+
+/*Home*/
+
+.watchDemoBtn {
+    background: url(../images/watch-demo-sprite.png);
+    height: 28px;
+    margin-left: 4px;
+    width: 145px;
+    display: inline-block;
+}
+
+.watchDemoBtn:hover {
+    background: url(../images/watch-demo-sprite.png) 144px 0px;
+}
+
+.learnHowBtn {
+    background: url(/images/adt-findU-home-button-sprite.png) 635px 0px;
+    height: 46px;
+    width: 313px;
+    position: absolute;
+    right: -25px;
+    top: 74px;
+
+}
+
+.learnHowBtn:hover {
+    background: url(../images/adt-findU-home-button-sprite.png) 317px 0px;
+
+}
+
+.signUpBtn {
+    background: url(/images/adt-findU-home-button-sprite.png) 0px 46px;
+    height: 46px;
+    position: absolute;
+    right: 33px;
+    top: 40px;
+    width: 195px;
+
+}
+
+.signUpBtn:hover {
+    background: url(/images/adt-findU-home-button-sprite.png) -201px 238px;
+}
+
+.signUpHash {
+    background: url(../images/adt-findu-pricing-how-footer-sign-up-c.png);
+    width: 222px;
+    height:34px;
+    position: absolute;right: 10px;
+    top: 96px;
+
+}
+
+.homeHeaderImage {
+    background: url(/images/adt-findU-home-header-image_edit_2.png);
+    width: 473px;
+    height: 374px;
+    position: absolute;
+    top: 37px;
+    left: 107px;
+
+}
+
+.homeHeaderTextRight {
+    height: 372px;
+    left: 611px;
+    position: absolute;
+    top: 37px;
+    width: 503px;
+}
+
+.androidLogo, .blackLogo, .appleLogo, .windowsLogo {
+    cursor: pointer;
+    background: url(../images/adt-findU-home-header-apps-v2.png);
+    height: 28px;
+    width: 103px;
+    display: inline-block;
+}
+
+.blackLogo {
+    background: url(../images/adt-findU-home-header-apps-v2.png) 163px 0px;
+    width: 82px;
+
+}
+
+.windowsLogo {
+    background: url(../images/adt-findU-home-header-apps-v2.png) 79px 0px;
+    width: 79px;
+
+}
+
+.appleLogo {
+    background: url(../images/adt-findU-home-header-apps-v2.png) 245px 0px;
+    width: 81px;
+
+}
+
+.appStoreLogoWrapHeader {
+    left: 610px;
+    position: absolute;
+    top: 255px;
+}
+
+.appStoreLogoWrapHeaderHow {
+
+    position: absolute;
+    top: 420px;
+}
+
+.marginTop20 {
+    margin-top: 10px !important;
+}
+
+.yellowMarker {
+    background: url(/images/adt-findU-home-header-marker.png);
+    width: 14px;
+    height: 19px;
+    display: inline-block;
+    background-repeat: no-repeat;
+    margin-bottom: 7px;
+    margin-right: 12px;
+
+}
+
+.priceYellowMarker {
+    background: url(/images/adt-findU-home-header-marker.png);
+    width: 14px;
+    height: 19px;
+    margin-right: 6px;
+
+}
+
+.headerList {
+    color: #FFFFFF;
+    left: 31px;
+    line-height: 30px;
+    position: absolute;
+    top: 87px;
+}
+
+.yellowMarkerWrap {
+    position: absolute;
+    top: 95px;
+
+}
+
+.yellowMarkerWrapHow {
+    position: absolute;
+    top: 195px;
+
+}
+
+.homeIconsWrap {
+    width: 960px;
+    margin: 0 auto;
+    padding-top: 35px;
+}
+
+.homeIcons {
+    background: url(../images/adt-findU-home-icons-image.png);
+    width: 963px;
+    height: 182px;
+}
+
+.medicalIcons {
+    background: url(../images/adt-findU-medical-sprite.png);
+    width: 180px;
+    height: 243px;
+    cursor: pointer;
+    float: left;
+    margin-bottom: 35px;
+}
+
+medicalIcons.title {
+    display: none;
+}
+
+.medicalIcons:hover {
+    background: url(../images/adt-findU-medical-sprite.png) 177px 0px;
+}
+
+.emergencyIcons {
+    background: url(../images/adt-findU-emergency-sprite.png);
+    width: 180px;
+    height: 243px;
+    cursor: pointer;
+    float: left;
+    margin-bottom: 35px;
+}
+
+.emergencyIcons:hover {
+    background: url(../images/adt-findU-emergency-sprite.png) 177px 0px;
+}
+
+.mountainIcons {
+    background: url(../images/adt-findU-mountain-sprite.png);
+    width: 180px;
+    height: 243px;
+    cursor: pointer;
+    float: left;
+    margin-bottom: 35px;
+}
+
+.mountainIcons:hover {
+    background: url(../images/adt-findU-mountain-sprite.png) 177px 0px;
+}
+
+.seaRescueIcons {
+    background: url(../images/adt-findU-sea-rescue-sprite.png);
+    width: 180px;
+    height: 243px;
+    cursor: pointer;
+    float: left;
+    margin-bottom: 35px;
+}
+
+.seaRescueIcons:hover {
+    background: url(../images/adt-findU-sea-rescue-sprite.png) 177px 0px;
+}
+
+.learnHowItWorksBtn {
+    background: url(../images/adt-findU-how-it-works-sprite.png);
+    width: 314px;
+    height: 45px;
+    cursor: pointer;
+    float: left;
+    margin-bottom: 10px;
+    margin-top: 47px;
+}
+
+.learnHowItWorksBtn:hover {
+    background: url(../images/adt-findU-how-it-works-sprite.png) 315px 0px;
+}
+
+.findOutMoreBtn {
+    background: url(../images/adt-findU-findoutmore-sprite.png);
+    width: 180px;
+    height: 35px;
+    cursor: pointer;
+    margin-left: 250px;
+}
+
+.findOutMoreBtn:hover {
+    background: url(../images/adt-findU-findoutmore-sprite.png) 180px 0px;
+}
+
+.iconMarginator {
+    margin-right: 80px;
+}
+
+p.finePrint {
+    color: #696B75;
+    margin-top: -24px;
+    font-size: 14px;
+    font-family: 'Arial W10 Rounded Bold';
+    clear: both;
+}
+
+.center {
+    text-align: center;
+}
+
+.familyIcon {
+    float: left;
+    margin: 40px 15px 0 16px;
+}
+
+.familyCopy {
+    width: 500px;
+    margin-top: 20px;
+    float: left;
+}
+
+.familyTextWrap {
+    padding-left: 105px;
+    padding-top: 35px;
+}
+
+.nintyNinePanel {
+    background: url(../images/adt-findu-new-footer.png) no-repeat;
+    height: 125px;
+    width:598px;
+    left: 0;
+    position: absolute;
+    top: 25px;
+
+
+}
+
+.existWrap {
+    left: 475px;
+    position: absolute;
+    top: 46px;
+    z-index: 2;
+}
+
+.fortyNineImage {
+    background: url(../images/adt-findu-pricing-how-footer-b-edit.png);
+    width:174px;
+    height:116px;
+    position: absolute;
+    top: -26px;
+    left: -51px;
+
+}
+
+/*Contact*/
+
+.contactHeaderIcon {
+    background: url(/images/adt-findU-contact-header-icon.png);
+    height: 230px;
+    left: 616px;
+    position: absolute;
+    top: 90px;
+    width: 213px;
+}
+
+.enquiriesWrap {
+    margin-right: 14px;
+    margin-top: 46px;
+    float: right;
+}
+
+.contactTextHeaderWrap {
+    width: 395px;
+    margin-left: 76px;
+}
+
+.contactTextHeaderWrap>h1{
+    padding-bottom: 8px !important;
+}
+
+.quoteMargin {
+    margin-left: 70px;
+}
+
+.formContainer {
+    width: 810px;
+    margin: 0 auto;
+    height: 700px;
+    font-family: Arial;
+    font-size: 12px;
+
+}
+
+.rightPane {
+    /*  margin-bottom: 57px;*/
+    margin-left: 13px;
+    margin-top: 103px;
+    position: relative;
+}
+
+.leftPane {
+    width: 405px;
+}
+
+form {
+    margin: 0;
+    width: 830px;
+}
+
+select {
+    background-color: #FFFFFF;
+    color: #000000;
+    display: inline-block;
+    height: 27px;
+    position: absolute;
+    width: 190px;
+}
+
+option {
+    color: #000000;
+}
+
+input[type="text"] {
+    width: 379px;
+    height: 23px;
+    margin-bottom: 3px;
+    margin-top: 3px;
+    background: url(/images/adt-findU-contact-input-bacground.jpg);
+    background-repeat: repeat;
+    outline: none;
+    border: none;
+    padding-left: 6px;
+}
+
+textarea {
+    height: 204px;
+    width: 379px;
+    outline: none;
+    border: none;
+    margin-bottom: 3px !important;
+    margin-top: 3px !important;
+    padding-left: 6px;
+    background: url("/images/adt-findU-contact-input-bacground.jpg") repeat-x scroll center top #F8F8F9;
+    overflow: auto;
+    vertical-align: top;
+    resize: none !important;
+}
+
+input[type="radio"] {
+    width: 19px;
+    height: 19px;
+
+}
+
+input[type="checkbox"] {
+    width: 17px;
+    height: 17px;
+
+}
+
+button, html input[type="button"] {
+    float: left;
+}
+
+.customBlueLabel {
+    font-family: 'Arial W10 Rounded Bold';
+    color: #005fa9;
+    font-size: 14px;
+
+}
+
+div.radio {
+    width: 19px;
+    height: 19px;
+    background: url(/images/uniform-contact-select-radio.png) 0px -35px;
+    float: left;
+    margin-right: 6px;
+}
+
+div.radio span {
+    width: 19px;
+    height: 19px;
+
+}
+
+div.radio span.checked {
+    width: 19px;
+    height: 19px;
+    background: url(/images/uniform-contact-select-radio.png) 0px -2px;
+    background-repeat: no-repeat;
+    display: inline-block;
+}
+
+div.checker {
+    width: 17px;
+    height: 18px;
+    background: url(/images/uniform-contact-select-checkbox.png) 0px -17px;
+    float: left;
+    margin-right: 6px;
+}
+
+.checkerLabel {
+    display: inline-table;
+    padding-top: 2px;
+
+}
+
+.checkerMarginFix {
+    margin-left: 8px;
+}
+
+div.checker span {
+    width: 17px;
+    height: 18px;
+}
+
+div.checker span.checked {
+    width: 17px;
+    height: 18px;
+    display: inline-block;
+    background: url(/images/uniform-contact-select-checkbox.png) 0px 1px;
+    background-repeat: no-repeat;
+}
+
+div.selector {
+    background: url(/images/uniform-contact-select-sprite.png);
+    width: 189px;
+    height: 28px;
+    position: relative;
+
+}
+
+.selector > div > span {
+    color: #FFFFFF;
+    left: 10px;
+    position: absolute;
+    top: 6px;
+}
+
+div.selector.hover {
+    background: url(/images/uniform-contact-select-sprite.png) 0px 252px;
+
+}
+
+.submitButton {
+    background: url(/images/adt-findU-contact-submit-btn.png);
+    width: 104px;
+    height: 29px;
+    outline: none;
+    border: none;
+    float: right;
+    margin-right: 34px;
+    margin-top: 56px;
+}
+
+.submitButton:hover {
+    background: url(/images/adt-findU-contact-submit-btn.png) 101px 58px;
+}
+
+.submitGradient, .gradientHow {
+    /*    background: url(/images/adt-findU-contact-submit-gradien_edi_2t.png);*/
+    display: block;
+    /*    width: 821px;*/
+    width: 791px;
+
+    /* margin-top: 497px;*/
+}
+
+/*How it Works*/
+
+.gradientHow {
+    background: url(/images/adt-findU-contact-submit-gradien_edi_2t.png);
+    height: 57px;
+    margin: -30px -30px 10px 83px;
+
+}
+
+.howTextLeft {
+
+    color: #ffffff;
+    margin-top: 35px;
+
+}
+
+.howList {
+    margin-left: 20px;
+    width: 397px;
+    font-weight: normal !important;
+
+}
+
+.howIpad {
+    background: url(/images/adt-findU-how-header-ipad.png);
+    height: 452px;
+    left: 415px;
+    position: absolute;
+    top: 75px;
+    width: 548px;
+}
+
+.panelA {
+    width: 960px;
+}
+
+.panelA > .panLeft {
+    background: url(/images/adt-findU-how-b-phone.png);
+    background-position: left;
+    background-repeat: no-repeat;
+    display: block;
+    height: 177px;
+    padding-left: 93px;
+    padding-top: 10px;
+    width: 397px;
+
+}
+
+.panelA > .panRight {
+    background: url(/images/adt-findU-how-b-phone.png);
+    background-position: left;
+    background-repeat: no-repeat;
+    display: inline-block;
+    height: 177px;
+    padding-left: 95px;
+    padding-top: 10px;
+    width: 367px;
+}
+
+.panelA {
+    width: 960px;
+    margin-top: 15px;
+}
+
+.panelA > .panLeft  > h2, .panelA > .panRight > h2 {
+    font-size: 18px;
+}
+
+.panelB {
+    width: 960px;
+}
+
+.panelB > .panLeft > h2, .panelB > .panRight > h2 {
+    font-size: 14px;
+}
+
+.panelB >.panLeft {
+    background: url(/images/adt-findU-how-b-alert_edit.png);
+    background-position: inherit;
+    background-repeat: no-repeat;
+    display: block;
+    height: 130px;
+    padding-left: 93px;
+    padding-top: 10px;
+    width: 397px;
+
+}
+
+.panelB >.panRight {
+    background: url(/images/adt-findU-how-camera.png);
+    background-position: inherit;
+    background-repeat: no-repeat;
+    display: inline-block;
+    height: 130px;
+    padding-left: 95px;
+    padding-top: 10px;
+    width: 367px;
+
+}
+
+.carouselC.carouselCHow > h2 {
+    float: left;
+    color: #ffffff;
+}
+
+.infographic {
+    width: 947px;
+    height: 291;
+
+    margin: 0 auto;
+    position: relative;
+
+}
+
+.CarouselPricing {
+
+    width: 947px;
+
+    margin: 0 auto;
+    position: relative;
+
+}
+
+.columLeft {
+    float: left;
+    width: 500px;
+}
+
+.columRight {
+    float: left;
+    width: 400px;
+}
+
+.infographicWrap {
+    width: 900px;
+    margin: 0 auto;
+    color: #ffffff;
+    margin-top: -13px;
+
+}
+
+.infographicHeaderSmall {
+    text-transform: uppercase;
+
+    font-size: 16px;
+    color: #ffffff;
+    margin-bottom: 10px !important;
+}
+
+.infographicNew {
+    margin-top: 22px;
+
+}
+
+.infoTextA, .infoTextB, .infoTextC {
+    width: 192px;
+    height: auto;
+    float: left;
+}
+
+.infoTextA {
+    margin-right: 131px;
+}
+
+.infoTextB {
+    margin-right: 102px;
+}
+
+/*Pricing*/
+.signUpNowBtn {
+    background: url(/images/adt-findU-prcing-sign-up-now.png);
+    width: 253px;
+    height: 43px;
+    margin: 432px 0 0 205px;
+
+}
+
+.signUpNowBtn:hover {
+    background: url(/images/adt-findU-prcing-sign-up-now.png) 255px 0px;
+}
+
+.signUpNowPricingBtnNew {
+    background: url(/images/adt-findU-pricing-sign-up-btn-with-hover.png) 0px 0px;
+    width: 298px;
+    height: 42px;
+    margin: 230px 0 0 645px;
+
+}
+
+.signUpNowPricingBtnNew:hover {
+
+    background: url(/images/adt-findU-pricing-sign-up-btn-with-hover.png) 0px 43px;
+}
+
+.headerImage {
+    background: url(../images/adt-findu-pricing-main-image-update-edit.png);
+    width: 468px;
+    height: 185px;
+}
+
+.headerLeft {
+    color: #ffffff;
+    left: 501px;
+    margin-top: 45px;
+    position: absolute;
+    top: 21px;
+    width: 416px;
+}
+
+.leftpanel {
+    width: 185px;
+
+}
+
+.leftpanelPricing {
+    float: left;
+    width: 208px;
+}
+
+.rightpanelPricing {
+    float: right;
+    width: 208px;
+}
+
+.leftpanelPricing .row, .rightpanelPricing .row {
+    float: left;
+    display: block;
+    width: 100%;
+
+}
+
+.priceYellowWrapper {
+    margin-top: 18px;
+
+}
+
+.findUPoints {
+    font-family: 'Arial W10 Rounded Bold';
+    font-size: 14px;
+    line-height: 23px;
+
+}
+
+.markerFix {
+    margin-top: 4px;
+}
+
+.ulPricing {
+    padding-left: 0px !important;
+    margin-right: 6px;
+}
+
+.liPricing {
+    height: 21px;
+    list-style: none outside none;
+    padding-left: 14px;
+    padding-top: 9px;
+    width: 224px;
+    background-color: #BCBCBF;
+}
+
+.darkGrey {
+    background-color: #b2b2b5;
+
+}
+
+.liCenter {
+    padding-left: 76px;
+    width: 138px;
+}
+
+.ulPricing > li {
+    font-family: 'Arial W10 Rounded Bold';
+    font-size: 12px;
+    text-transform: uppercase;
+
+    color: #69696a;
+
+}
+
+.checkedTable {
+    left: 314px;
+    padding-right: 62px;
+    position: absolute;
+    top: 137px;
+
+}
+
+.checkImageTable {
+    margin-left: 17px;
+    margin-top: -5px;
+}
+
+.forFamilyWrap {
+    width: 920px;
+    margin: 0 auto;
+    padding-top: 18px;
+}
+
+.columRightPricing {
+    padding-top: 41px;
+
+}
+
+.greyBlock {
+    background-color: #dedde2;
+    width: 422px;
+    height: 205px;
+    float: left;
+    padding-left: 19px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #69696a;
+
+}
+
+.marginBot {
+    margin-bottom: 6px;
+}
+
+/* About */
+.visitOurSiteBtn {
+    background: url(/images/adt-findU-about-btn-sprite.png);
+    width: 208px;
+    height: 29px;
+    margin-top: 23px;
+
+}
+
+.visitOurSiteBtn:hover {
+    background: url(/images/adt-findU-about-btn-sprite.png) 248px 0px;
+
+}
+
+.moreOnHowBtn {
+    background: url(/images/adt-findU-about-btn-sprite.png) 0px 41px;
+    width: 228px;
+    height: 40px;
+    margin-left: 2px;
+    margin-top: 10px;
+
+}
+
+.moreOnHowBtn:hover {
+    background: url(/images/adt-findU-about-btn-sprite.png) 230px 41px;
+
+}
+
+.aboutHeaderPanel {
+
+    height: auto;
+
+    margin-left: 60px;
+    margin-top: 55px;
+    width: 387px;
+
+}
+
+.aboutPanel {
+
+    height: auto;
+    margin-top: 1px;
+    width: 387px;
+
+}
+
+.aboutHeaderImage {
+    background: url(/images/adt-findU-about-header-main.png) -16px 0px;
+    width: 513px;
+    height: 302px;
+
+}
+
+.aboutleftpanel {
+    width: 379px;
+
+}
+
+.aboutYellowWrapper {
+    background: url(/images/adt-findU-how-b-phone.png);
+    background-position: left top;
+    background-repeat: no-repeat;
+    width: 466px;
+    height: 246px;
+    margin-top: 18px;
+    padding-left: 88px;
+}
+
+.listPad {
+    margin-bottom: 5px;
+}
+
+.rightPanel {
+    width: 430px;
+    margin-left: 60px;
+}
+
+/*errors*/
+.errorMessage, .selectError {
+    color: #a53232;
+    float: right;
+    visibility: hidden;
+}
+
+#nameError {
+    color: #a53232;
+    float: right;
+    visibility: hidden;
+}
+
+#mobileError {
+    color: #a53232;
+    float: right;
+    visibility: hidden;
+}
+
+.selectError {
+    margin-right: 197px;
+    margin-top: -10px;
+}
+
+/*clearFix*/
+.clearfix:after {
+    content: ".";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    line-height: 0;
+    height: 0;
+}
+
+.clearfix {
+    display: inline-block;
+}
+
+.invalid > .errorMessage {
+
+    visibility: visible;
+}
+
+html[xmlns] .clearfix {
+    display: block;
+}
+
+* html .clearfix {
+    height: 1%;
+}
+
+/*video overlay*/
+.overlayBlock {
+    width: 100%;
+    height: 100%;
+    background: #000;
+    position: fixed;
+    left: 0;
+    top: 0;
+    display: none;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+    filter: alpha(opacity = 85);
+    -moz-opacity: 0.85;
+    -khtml-opacity: 0.85;
+    opacity: 0.85;
+    z-index: 10000001;
+}
+
+.overlayContainer {
+    /* add your container width here. Can be a percentage for responsive development */
+    width: 560px;
+    height: 400px;
+    /* Margin top and left must be minus half of set width (left margin) or height (top margin) */
+    margin: -280px 0px 0px -280px;
+    display: none;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    z-index: 100000001;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    transition: opacity 1s ease-out;
+    background: none;
+}
+
+.marginRight30 {
+    margin-right: 30px;
+}
+
+.marginRight34 {
+    margin-right: 34px;
+}
+
+/*Tooltip CSS*/
+
+.tooltip {
+    display: inline;
+    position: relative;
+}
+
+.tooltip:hover:after {
+    background: #FFFFFF;
+    background: rgba(255, 255, 255, .9);
+    border-radius: 5px;
+    bottom: 250px;
+    color: #000;
+    content: attr(data-tooltip);
+    left: 20%;
+    padding: 5px 15px;
+    position: absolute;
+    z-index: 98;
+    width: 220px;
+}
+
+.tooltip:hover:before {
+    border: solid;
+    border-color: #FFFFFF transparent;
+    border-width: 6px 6px 0 6px;
+    bottom: 244px;
+    content: "";
+    left: 45%;
+    position: absolute;
+    z-index: 99;
+}
+
+.homeNav {
+    padding-right: 36px !important;
+}

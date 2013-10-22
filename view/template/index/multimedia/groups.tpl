@@ -1,4 +1,4 @@
-<h1>Мої конференції</h1>
+<h1>Мої групи</h1>
 <div class="double-line"></div>
 
 <form method="post" action="<?php echo $this->build_url(array($this->controller, 'addmultimediagroup')); ?>" class="mtop10">

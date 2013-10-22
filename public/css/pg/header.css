@@ -1,0 +1,153 @@
+.preHeader {
+    width: 100%;
+    height: 38px;
+    background-color: #ffb100;
+
+}
+.preheaderWrap{
+    width: 960px;
+    margin: 0 auto;
+
+}
+
+.viewAlertButton {
+    background:url(/images/adt-findU-header-alert-btn.png);
+    width:153px;
+    height: 28px;
+    margin-top:3px;
+    margin-left:22px;
+    cursor: pointer;
+}
+.viewAlertButton:hover{
+    background:url(/images/adt-findU-header-alert-btn.png) 153px 0px;
+
+
+}
+
+.siteHeader {
+    height: 129px;
+    background-color: #ffffff;
+    width: 960px;
+    margin: 0 auto;
+    position: relative;
+
+}
+
+.siteLogo {  background-image: url(/images/adt-findU-header-logo.png);
+    background-position: left;
+    width: 280px;
+    height:86px;
+    position: absolute;
+    top: 20px;
+
+}
+
+.nav {
+    background-repeat: no-repeat;
+    color: #005FAD;
+    font-family: arial;
+    font-size: 11px;
+    font-weight: bold;
+    height: 46px;
+    margin-left: 308px;
+    margin-top: 55px;
+    text-transform: uppercase;
+    width: 490px;
+
+}
+.nav a:hover {   color: #ffb300;
+
+}
+
+
+
+.staySafe {
+    position: absolute;
+    right: 0;
+    top: 30px;
+    color: #b5b5b5;
+    font: helvetica;
+    font-weight: bold;
+    font-size: 25px;
+
+
+}
+h2.findU , h2.pricingHeader{
+
+
+    font: helvetica;
+    font-weight: bold;
+    font-size: 25px;
+
+
+}
+
+
+
+
+.siteHeader > .nav ul {
+    list-style-type: none;
+    list-style: none;
+    padding-top: 20px;
+    padding-left: 0;
+}
+
+.siteHeader > .nav ul li {
+   /* padding-right: 37px;*/
+    display: inline;
+    /*float:left;*/
+    background: url(/images/adt-findU-header-nav-slash-divider.png) top right;
+    background-repeat: no-repeat;
+    padding: 18px 26px 14px 8px !important;
+    height: 42px;
+}
+
+.siteHeader > .nav ul li.active > a  {
+    color: #ffb300;
+    display: inline-block;
+}
+
+.loginBtn{
+    background: url(/images/adt-findU-header-log-sign.jpg);
+    width:100px;
+    height: 28px;
+    position: absolute;
+    right: 100px;
+    top: 83px;
+    cursor: pointer;
+
+}
+.loginBtn:hover{    background: url(/images/adt-findU-header-log-sign.jpg) 302px 0;
+
+}
+
+.signInBtn{
+    background: url(/images/adt-findU-header-log-sign.jpg) 201px 0;
+    width:100px;
+    height: 28px;
+    position: absolute;
+    right: 0px;
+    top: 83px;
+    cursor: pointer;
+}
+.signInBtn:hover{
+    background: url(/images/adt-findU-header-log-sign.jpg) 100px 0;
+}
+
+.loginClass {
+    /* IE 8 */
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+
+    /* IE 5-7 */
+    filter: alpha(opacity=0);
+
+    /* Netscape */
+    -moz-opacity: 0;
+
+    /* Safari 1.x */
+    -khtml-opacity: 0;
+
+    /* Good browsers */
+    opacity: 0;
+
+}

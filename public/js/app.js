@@ -162,7 +162,7 @@ App.dialog = {
 App.ajax = {
     request: function( options ) {
         options = $.extend({}, {type: 'post', dataType:'json', data:{}}, options);
-        options.url = App.config.appDir ? "/" + App.config.appDir + (options.url ? options.url : "/") : ( options.url ? options.url : "/");
+        options.url = App.config.appDir ? '/' + App.config.appDir + (options.url ? options.url : '/') : (options.url ? options.url : '/');
         
         var ajax = $.ajax(options);
         ajax.always(function(response) {
@@ -170,7 +170,7 @@ App.ajax = {
                 if(typeof options.onError == 'function') {
 					options.onError(response); 
                 }else{
-					if (response.message) 
+					if(response.message) 
 						App.log(response.message);
 					else
 						App.log('Unknown error. "success" is false or empty');
@@ -192,42 +192,176 @@ App.ajax = {
 
 App.conference = {
 	url: 'rtmp://nfbmedia.com/vod',
+	userUrl: 'rtmp://nfbmedia.com/pub',
 	
-	start: function(type, id) {
-		var videoId = 'video' + id;
-		$('#' + videoId).show();
-		this.createSwfObject(videoId, {src: this.url + '?' + type + '=' + id});
-		
-		// connect
-		
+	id: null,
+	
+	type: null,
+	
+	onAir: 0,
+	
+	user: {
+		id: null,
+		name: '',
+		isPublisher: false,
+		onAir: false
 	},
 	
-	stop: function(id) {
-		var videoId = 'video' + id;
-		var videoObject = this.getSwfObject(videoId);
-		if(videoObject) {
-			videoObject.setProperty('src', '');
-//			videoObject.setProperty('live', true);
-			$(videoObject).remove();
+	server: {
+		socket: null,
+		
+		init: function(id, userId, userName, isPublisher) {
+			var obj = this;
+			
+			setTimeout(function() {
+				if(typeof io !== 'undefined') {
+					App.conference.id = id;
+					
+			        if(0 && navigator.userAgent.toLowerCase().indexOf('chrome') != -1) { // Chrome
+			            obj.socket = io.connect('http://nfbmedia.com:8080', {'transports': ['xhr-polling']});
+			        } 
+			        else {
+			            obj.socket = io.connect('http://nfbmedia.com:8080');
+			        }
+			        
+			        obj.socket.on('connect', function() {
+			        	App.log('connect', userId, userName, isPublisher);
+			            obj.onconnect(userId, userName, isPublisher);
+			            
+			            obj.socket.on('message', function(msg) {
+			                App.log(msg, msg.conferenceId);
+			                
+			                var msgName = 'msg_' + msg.event;
+			                App.log(msgName);
+			                
+			                if(typeof obj[msgName] == 'function') {
+			                	if(App.conference.id == msg.conferenceId) {
+			                    	obj[msgName](msg);
+			                	}
+			                } 
+			                else {
+			                    App.log('Conference Server - Unknown Message:' + msg);
+			                }
+			            });
+			        });
+				}
+				else {
+					App.log('Soket IO not defined');
+				}
+			}, 500);
+		},
+		
+		onconnect: function(userId, userName, isPublisher) {  
+			if(this.socket) {
+				App.conference.user = {id: userId, name: userName, isPublisher: isPublisher};
+	        	this.socket.json.send({event: 'entry', conferenceId: App.conference.id, userId: userId, userName: userName, isPublisher: isPublisher});
+			}
+	    },
+	    
+	    send: function(msg) {
+	    	if(this.socket) {
+	    		App.log('Soket IO Send', msg);
+	        	this.socket.json.send(msg);
+	    	}
+	    },
+	    
+	    msg_connected: function(msg) {  
+	    	// start conference
+	    	if(msg.onAir) {
+				App.conference.start();
+	    	}
+
+			// add users
+			App.conference.userList.addItems(msg.users);
+	    },
+	    
+	    msg_userJoined: function(msg) {
+			App.conference.userList.addItems([{userId: msg.userId, userName: msg.userName, isPublisher: msg.isPublisher}]);
+	    },
+	    
+	    msg_userExit: function(msg) {
+			App.conference.userList.removeItem(msg.userId);
+	    },
+	    
+	    msg_startConference: function(msg) {
+			App.conference.start();
+	    },
+	    
+	    msg_stopConference: function(msg) {
+			App.conference.stop();
+	    },
+	    
+	    msg_pingConferenceUser: function(msg) {
+	    	switch(msg.action) {
+	    		case 'userCameraPublish':
+		    			App.conference.userCamera.start(App.conference.user.id, 1);
+		    			App.conference.server.send({event: 'conferenceBroadcast', action: 'userCameraPlay', conferenceId: App.conference.id, userId: App.conference.user.id});
+	    			break;
+	    	}
+	    },
+	    
+	    msg_conferenceBroadcast: function(msg) {
+	    	switch(msg.action) {
+	    		case 'userCameraPlay':
+	    				App.conference.userCamera.start(msg.userId, 0);
+	    			break;
+	    			
+	    		case 'userCameraStop':
+	    				App.conference.userCamera.stop(msg.userId);
+	    			break;
+	    			
+	    		case 'userChatAddMessage':
+	    				App.conference.userChat.addMessage(msg.userName, msg.userMessage);
+	    			break;
+	    	}
+	    }
+	},
+	
+	start: function() {
+		if(this.id) {
+			var type = this.user.isPublisher ? 'publish' : 'play';
+			
+			var videoId = 'video' + this.id;
+			$('#' + videoId).show();
+			this.createSwfObject(videoId, {src: this.url + '?' + type + '=' + this.id});
+			
+			this.onAir = 1;
+			
+			// show close button / hide start button
+			$('#conferenceOn').hide();
+			$('#conferenceOff').show();
+			
+			// start
+			if(type == 'publish') {
+				this.server.send({event: 'startConference', conferenceId: this.id});
+			}
+			
+			App.conference.userList.refresh();
 		}
 	},
 	
-	listen: function(id) {
-		setTimeout(function() {
-			App.ajax.request({
-				url: '/' + App.config.appController + '/getmultimediastatus/' + id,
-				data: {},
-				onDone: function(response) {
-					if(response.status == 0) {
-						App.conference.listen(id);
-					}
-					
-					if(response.status == 1) {
-						App.conference.start('play', id);
-					}
+	stop: function() {
+		if(this.id) {
+			var videoId = 'video' + this.id;
+			var videoObject = this.getSwfObject(videoId);
+			if(videoObject) {
+				videoObject.setProperty('src', '');
+				$(videoObject).remove();
+				
+				this.onAir = 2;
+				
+				// show status
+				$('#player .status').html('Конференцію завершено');
+				
+				// stop
+				var type = this.user.isPublisher ? 'publish' : 'play';
+				if(type == 'publish') {
+					this.server.send({event: 'stopConference', conferenceId: this.id});
 				}
-			});
-		}, 1000);
+				
+				App.conference.userList.refresh();
+			}
+		}
 	},
 	
 	createSwfObject: function(videoId, vars) {
@@ -237,17 +371,168 @@ App.conference = {
 		};
 		
 		var flashVars = {
-			cameraQuality: 90, 
 			enableFullscreen: true, 
-			controls: true
+			controls: true,
+			rate: 8,
+			gain: 0.4,
+			sileneceLevel: 2,
+			cameraFPS: 24,
+			cameraQuality: 95,
+			cameraDimension: '320x240'
+//			codec: 'NellyMoser'
+//			videoCodec: 'H264Avc'
 		};
         
         swfobject.embedSWF('/swf/VideoIO.swf', videoId, $('#' + videoId).width(), $('#' + videoId).height(), '9.0.28', 'expressInstall.swf', $.extend(flashVars, vars), flashParams, {id: videoId});
 	},
 	
 	getSwfObject: function(movieName) {
-    	var isIE = navigator.appName.indexOf("Microsoft") != -1;
+    	var isIE = navigator.appName.indexOf('Microsoft') != -1;
     	return (isIE) ? window[movieName] : document[movieName];
+	},
+	
+	playVideo: function(id, converting_status) {
+		if(converting_status == 0) {
+			setTimeout(function() {
+				App.ajax.request({
+					url: '/' + App.config.appController + '/getmultimediaconvertingstatus/' + id,
+					data: {},
+					onDone: function(response) {
+						App.conference.playVideo(id, response.status && response.status == 1 ? 1 : 0);
+					}
+				});
+			}, 20000);
+		}
+		else {
+			var videoId = 'video' + id;
+			this.createSwfObject(videoId, {src: 'http://nfbmedia.com/recorded_videos/' + id + '.flv'});
+		}
+	},
+	
+	// users list
+	userList: {
+		addItems: function(items) {
+			for(var i=0; i<items.length; i++) {
+				if(items[i].userId && items[i].userName && !items[i].isPublisher) {
+					if($('#user' + items[i].userId).length == 0) {
+						var template = $('#conferenceUser').html();
+						template = template.split('{$conference.id}').join(App.conference.id);
+						template = template.split('{$user.id}').join(items[i].userId);
+						template = template.split('{$user.name}').join(items[i].userName);
+						$('#usersList').append(template);
+						
+						if(typeof items[i].onAir !== 'undefined' && items[i].onAir) {
+							App.conference.userCamera.start(items[i].userId, 0);
+						}
+					}
+				}
+			}
+			
+			this.refresh();
+		},
+		
+		removeItem: function(itemId) {
+			$('#user' + itemId).remove();
+			this.refresh();
+		},
+		
+		refresh: function() {
+			App.log('Refresh List');
+			
+			switch(App.conference.onAir) {
+				case 0:
+				case 1:
+						if($('#usersList .item').length > 1) {
+							$('#usersList .item.null').hide();
+						}
+						else {
+							$('#usersList .item.null').show();
+						}
+						
+						if(App.conference.onAir == 1 && App.conference.user.isPublisher) {
+							$('#usersList .play').show(); // status = 0 onAir = false
+						}
+					break;
+					
+				case 2: 
+						$('#usersList .item[id^="user"]').remove();
+						$('#usersList .item.null').show();
+					break;	
+			}
+		}
+	},
+	
+	// users video 
+	userCamera: {
+		status: false,
+		
+		action: function(user_id) {
+			this.status = !this.status;
+			App.log(user_id, this.status);
+			
+			if(this.status) {
+				App.conference.server.send({event: 'pingConferenceUser', action: 'userCameraPublish', conferenceId: App.conference.id, userId: user_id});
+			}
+			else {
+				App.conference.server.send({event: 'conferenceBroadcast', action: 'userCameraStop', conferenceId: App.conference.id, userId: user_id});
+				this.stop(user_id);
+			}
+		},
+		
+		start: function(user_id, status) {
+			this.status = true;
+			
+			var userVideoId = 'video' + App.conference.id + '_' + user_id;
+			if($('#' + userVideoId).length) {
+				$('#' + userVideoId).parent().show();
+				App.conference.createSwfObject(userVideoId, {src: App.conference.userUrl + '?' + (status ? 'publish' : 'play') + '=' + App.conference.id + '_' + user_id, controls: false, volume: 0.9, cameraDimension: '265x150'});
+			}
+			
+			this.refresh(user_id);
+		},
+		
+		stop: function(user_id) {
+			this.status = false;
+			
+			var userVideoId = 'video' + App.conference.id + '_' + user_id;
+			if($('#' + userVideoId).length) {
+				var userVideoObject = App.conference.getSwfObject(userVideoId);
+				if(userVideoObject) {
+					userVideoObject.setProperty('src', '');
+					$(userVideoObject).parent().hide();
+				}
+			}
+			
+			this.refresh(user_id);
+		},
+		
+		refresh: function(user_id) {
+			if(this.status) {
+				$('#user' + user_id + ' .play').addClass('active');
+			}
+			else {
+				$('#user' + user_id + ' .play').removeClass('active');
+			}
+		}
+	},
+	
+	// users chat
+	userChat: {
+		sendMessage: function(msg) {
+			App.conference.server.send({event: 'conferenceBroadcast', action: 'userChatAddMessage', conferenceId: App.conference.id, userName: App.conference.user.name, userMessage: msg});
+			this.addMessage(App.conference.user.name, msg);
+		},
+		
+		addMessage: function(name, msg) {
+			if(msg.length) {
+				var template = $('#chatMessage').html();
+				template = template.split('{$name}').join(name);
+				template = template.split('{$message}').join(msg);
+				$('#messagesList').append(template);
+				
+				$('#messagesList').closest('.nano').nanoScroller({scrollTop: $('#messagesList')[0].scrollHeight});
+			}
+		}
 	}
 };
 
@@ -627,30 +912,38 @@ App.actions = {
 	},
 	
 	conferenceOn: function($this, data) {
-		$this.hide();
-		$('#conferenceOff').show();
-		
-		App.ajax.request({
-			url: '/' + App.config.appController + '/updatemultimediastatus/' + data.conferenceId + '/1',
-			data: {},
-			onDone: function(response) {
-				App.conference.start('publish', data.conferenceId);
-			}
-		});
+		App.log(App.conference.id);
+		if(App.conference.id) {
+			$this.hide();
+			
+			App.ajax.request({
+				url: '/' + App.config.appController + '/updatemultimediastatus/' + App.conference.id + '/1',
+				data: {},
+				onDone: function(response) {
+					App.conference.start();
+				}
+			});
+		}
 	},
 	
 	conferenceOff: function($this, data) {
-		$this.hide();
-//		$('#conferenceOn').show();
-		
-		App.ajax.request({
-			url: '/' + App.config.appController + '/updatemultimediastatus/' + data.conferenceId + '/2',
-			data: {},
-			onDone: function(response) {
-				App.conference.stop(data.conferenceId);
-				$('#player .center').html('Конференцію завершено');	
-			}
-		});
+		if(App.conference.id) {
+			$this.hide();
+			
+			App.ajax.request({
+				url: '/' + App.config.appController + '/updatemultimediastatus/' + App.conference.id + '/2',
+				data: {},
+				onDone: function(response) {
+					App.conference.stop();
+				}
+			});
+		}
+	},
+	
+	conferenceUserCamera: function($this, data) {
+		if(App.conference.id && App.conference.onAir == 1) {
+			App.conference.userCamera.action(data.userId);
+		}
 	}
 };
 
@@ -767,6 +1060,29 @@ App.elements = {
 		});
 
 		changeStep(data.selected);
+	},
+	
+	conferenceUserChat: function($this, data) {
+		var $input = $this.find('input.text');
+		var $button = $this.find('input.button');
+		
+		function sendMessage() {
+			var message = $.trim($input.val());
+			if(message.length) {
+				App.conference.userChat.sendMessage(message);
+				$input.val('');
+			}
+		}
+		
+		$button.on('click', function() {
+			sendMessage();
+		});
+		
+		$input.keydown(function(e){
+		    if(e.keyCode == 13) {
+		    	sendMessage();
+		    }
+		});
 	},
 	
 	checkboxTree: function($this, data) {

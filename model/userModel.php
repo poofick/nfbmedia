@@ -7,6 +7,7 @@
 		const USER_LEVEL_CUSTOMER = 4;
 		
 		public static $levels = array(
+			self::USER_LEVEL_ROOT  => 'Адміністратор',
 			self::USER_LEVEL_GENERAL_DIRECTOR => 'Генеральний директор',
 			self::USER_LEVEL_REGIONAL_DIRECTOR => 'Регіональний директор',
 			self::USER_LEVEL_CUSTOMER => 'Менеджер'
