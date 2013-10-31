@@ -32,7 +32,7 @@
 		}
 		
 		public function validate($request = array()) {
-			
+			$_Request = new Request();
 			$this->errors = array();
 			
 			foreach($this->fields as $name => $rules) {
@@ -53,7 +53,7 @@
 							}
 							
 							if(!empty($keys)) {
-								if(($value = isset($request[$name]) ? $request[$name] : Request::get($keys)) !== null) {
+								if(($value = isset($request[$name]) ? $request[$name] : $_Request->get($keys)) !== null) {
 									$is_error = false;
 									switch($r['rule']) {
 										case 'empty':

@@ -11,8 +11,9 @@
 		const CONFERENCE_STATUS_OFF = 2;
 		
 		// video_converting_status
-		const CONFERENCE_VIDEO_CONVERTING_STATUS_NO = 0;
-		const CONFERENCE_VIDEO_CONVERTING_STATUS_YES = 1;
+		const CONFERENCE_VIDEO_CONVERTING_STATUS_PENDING = 0;
+		const CONFERENCE_VIDEO_CONVERTING_STATUS_COMPLETED = 1;
+		const CONFERENCE_VIDEO_CONVERTING_STATUS_FAILED = 2;
                 
         public static $use = 'conference';
 
