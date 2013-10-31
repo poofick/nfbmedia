@@ -26,7 +26,7 @@ class videoController extends Controller {
 			$destinationFile = DOCROOT.'public/videos/'.$conferenceId.'.mp4';
 			
 			$command = array();
-			$command['encodeSourceFile'] = 'ffmpeg -y -i '.$souceFile.' -vcodec libx264 -s 320x240 -r 25 -b 1200kb -acodec libfaac -ar 8k -ab 32k -ac 2 -crf 18 '.$tempFile;
+			$command['encodeSourceFile'] = 'ffmpeg -y -i '.$souceFile.' -vcodec libx264 -s 320x240 -r 25 -b 1200k -acodec libfaac -ar 8k -ab 32k -ac 2 -crf 18 '.$tempFile;
 			//ffmpeg -y -i 21.flv -vcodec libx264 -crf 18 -acodec libfaac -ar 8k -ab 32k -ac 2 -s 320x240 -r 25 21.mp4
 			$command['encodeTempFile'] = 'MP4Box -add '.$tempFile.' '.$destinationFile;
 			
