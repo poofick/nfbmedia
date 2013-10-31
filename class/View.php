@@ -90,9 +90,10 @@
 		
 		public function get_absolute_url($path, $query = null) {
 			
-			$environment = Registry::get('environment') == 'production' ? 'live' : 'dev';
+			$environment = Registry::get('environment');
 			$brand = Registry::get('brand');
 			$domain = Registry::get(array('domain', $environment));
+			
 			$path = (is_string($path) ? $path : (is_array($path) && !empty($path) ? implode('/', $path)  : ''));
 			$query = ($query !== null ? (is_string($query) && strlen($query) ? $query : (is_array($query) && !empty($query) ? http_build_query($query) : '')) : '');
 			
