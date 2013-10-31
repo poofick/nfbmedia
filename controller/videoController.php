@@ -36,8 +36,8 @@ class videoController extends Controller {
 			$db = Registry::get('db');
 			$environment = Registry::get('environment');
 			
-			$command['mysqlSuccess'] = 'mysql -h '.$db[$environment]['host'].' -u '.$db[$environment]['user'].' -p'.$db[$environment]['pass'].' -e \'UPDATE `conference` SET `video_converting_status`=1, `video_url`="'.$this->view->get_absolute_url('videos/'.basename($destinationFile)).'" WHERE `id`='.$conferenceId.'\'';
-			$command['mysqlFailed'] = 'mysql -h '.$db[$environment]['host'].' -u '.$db[$environment]['user'].' -p'.$db[$environment]['pass'].' -e \'UPDATE `conference` SET `video_converting_status`=2, `video_url`="" WHERE `id`='.$conferenceId.'\'';
+			$command['mysqlSuccess'] = 'mysql -h '.$db[$environment]['host'].' -u '.$db[$environment]['user'].' -p'.$db[$environment]['pass'].' -D '.$db[$environment]['name'].' -e \'UPDATE `conference` SET `video_converting_status`=1, `video_url`="'.$this->view->get_absolute_url('videos/'.basename($destinationFile)).'" WHERE `id`='.$conferenceId.'\'';
+			$command['mysqlFailed'] = 'mysql -h '.$db[$environment]['host'].' -u '.$db[$environment]['user'].' -p'.$db[$environment]['pass'].' -D '.$db[$environment]['name'].' -e \'UPDATE `conference` SET `video_converting_status`=2, `video_url`="" WHERE `id`='.$conferenceId.'\'';
 			
 			$command['toBackground'] = ' > /dev/null 2>/dev/null &';
 			
