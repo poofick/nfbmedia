@@ -43,6 +43,9 @@ class videoController extends Controller {
 			
 			$output = shell_exec('(( ('.$command['encodeSourceFile'].' && '.$command['removeSourceFile'].') && ('.$command['encodeTempFile'].' && '.$command['removeTempFile'].') && ('.$command['mysqlSuccess'].') ) || ('.$command['mysqlFailed'].') ) '.$command['toBackground']);
 //			$output = shell_exec('(('.$command['encodeSourceFile'].' && '.$command['removeSourceFile'].') && ('.$command['encodeTempFile'].' && '.$command['removeTempFile'].')) '.$command['toBackground']);
+
+			file_put_contents(DOCROOT.'logs/video_recordDone.log', $output);
+
 			shell_exec($output);
 		}
 		
