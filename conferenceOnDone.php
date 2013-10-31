@@ -7,9 +7,6 @@ require_once('autoload.php');
 
 Registry::get_ini_file('config/config.ini');
 
-echo 'SERVER: '.print_r($_SERVER, true);
-echo 'REQUEST: '.print_r($_REQUEST, true);
-
 $conferenceId = 21;
 
 $souceFile = $conferenceId.'.flv';
