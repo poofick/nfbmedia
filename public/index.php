@@ -9,5 +9,5 @@ require_once('../autoload.php');
 
 Registry::get_ini_file('../config/config.ini');
 
-$app = new App();
+$app = new App(getenv('environment'));
 $app->dispatch()->run();

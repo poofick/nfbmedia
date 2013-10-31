@@ -25,7 +25,7 @@
 						$db = Registry::get('db');
 						$environment = Registry::get('environment');
 						
-						var_dump($db, $environment);
+						var_dump($environment);
 						
 						self::$handler[$key] = isset(self::$handler[$key]) ? self::$handler[$key] : new PDO('mysql:host='.$db[$environment]['host'].';dbname='.$db[$environment]['name'].'', $db[$environment]['user'], $db[$environment]['pass'], array(PDO::MYSQL_ATTR_FOUND_ROWS => true, PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES "UTF8"'));	// Registry
 					break;
