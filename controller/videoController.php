@@ -30,7 +30,7 @@ class videoController extends Controller {
 			//ffmpeg -y -i 21.flv -vcodec libx264 -crf 18 -acodec libfaac -ar 8k -ab 32k -ac 2 -s 320x240 -r 25 21.mp4
 			$command['encodeTempFile'] = 'MP4Box -add '.$tempFile.' '.$destinationFile;
 			
-			$command['removeSourceFile'] = 'rm -f '.$souceFile;
+			$command['removeSourceFile'] = 'rm -f '.$destinationFile.' '.$souceFile;
 			$command['removeTempFile'] = 'rm -f '.$tempFile;
 			
 			$db = Registry::get('db');
