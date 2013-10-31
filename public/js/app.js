@@ -391,21 +391,21 @@ App.conference = {
     	return (isIE) ? window[movieName] : document[movieName];
 	},
 	
-	playVideo: function(id, converting_status) {
+	playVideo: function(id, converting_status, url) {
 		if(converting_status == 0) {
 			setTimeout(function() {
 				App.ajax.request({
 					url: '/' + App.config.appController + '/getmultimediaconvertingstatus/' + id,
 					data: {},
 					onDone: function(response) {
-						App.conference.playVideo(id, response.status && response.status == 1 ? 1 : 0);
+						App.conference.playVideo(id, response.status && response.status == 1 ? 1 : 0, response.url);
 					}
 				});
 			}, 20000);
 		}
 		else {
 			var videoId = 'video' + id;
-			this.createSwfObject(videoId, {src: 'http://nfbmedia.com/recorded_videos/' + id + '.flv'});
+			this.createSwfObject(videoId, {src: url});
 		}
 	},
 	

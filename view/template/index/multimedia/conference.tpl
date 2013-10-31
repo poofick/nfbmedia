@@ -11,7 +11,7 @@
 <?php else: ?>	
 	<script>
 		$(function(){ 
-			App.conference.playVideo('<?php echo $this->conference['id']; ?>', '<?php echo $this->conference['video_converting_status']; ?>');
+			App.conference.playVideo('<?php echo $this->conference['id']; ?>', '<?php echo $this->conference['video_converting_status']; ?>', '<?php echo $this->conference['video_url']; ?>');
 		});	
 	</script>
 <?php endif; ?>

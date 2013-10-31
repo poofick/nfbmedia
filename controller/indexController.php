@@ -340,7 +340,7 @@
 			
 			if($conference_id = ctype_digit($this->request->get_segment(3)) ? $this->request->get_segment(3) : false) {
 				$conferenceData = $conferenceModel->find($conference_id);
-				return array('success' => true, 'status' => $conferenceData['video_converting_status']);
+				return array('success' => true, 'status' => $conferenceData['video_converting_status'], 'url' => $conferenceData['video_url']);
 			}
 			
 		}
