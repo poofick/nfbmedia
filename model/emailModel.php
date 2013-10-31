@@ -17,7 +17,7 @@ class emailModel extends Model {
 		$mail->Port = 25; //25, 465 or 587
 		$mail->Username = Registry::get('smtp.user');  
 		$mail->Password = Registry::get('smtp.pass');
-	    
+		
 	    $mail->SetFrom(isset($params['from']) ? $params['from'] : 'noreply@nfbmedia.com', isset($params['from_name']) ? $params['from_name'] : 'НФБ МЕДІА');
 		if(isset($params['address']) && is_array($params['address'])) {
 			foreach($params['address'] as $address) {
@@ -44,10 +44,12 @@ class emailModel extends Model {
 			}
 		}
 		
-		if(!@$mail->Send()) {
+		return true;
+		
+		/*if(!@$mail->Send()) {
 			$return = array('success' => false, 'error' =>  $mail->ErrorInfo);
 		}
 		
-		return $return;
+		return $return;*/
 	}
 }
