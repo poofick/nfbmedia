@@ -405,7 +405,8 @@ App.conference = {
 		}
 		else {
 			var videoId = 'video' + id;
-			this.createSwfObject(videoId, {src: url});
+//			this.createSwfObject(videoId, {src: url});
+			flowplayer(videoId, '/swf/flowplayer-3.2.16.swf', url);
 		}
 	},
 	

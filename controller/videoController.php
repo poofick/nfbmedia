@@ -21,20 +21,19 @@ class videoController extends Controller {
 		}
 		
 		if($conferenceId > 0) {
+			$db = Registry::get('db');
+			$environment = Registry::get('environment');
+			
 			$souceFile = DOCROOT.'public/videos/'.$conferenceId.'.flv';
 			$tempFile = DOCROOT.'public/videos/'.$conferenceId.'_temp.mp4';
 			$destinationFile = DOCROOT.'public/videos/'.$conferenceId.'.mp4';
 			
 			$command = array();
 			$command['encodeSourceFile'] = 'ffmpeg -y -i '.$souceFile.' -vcodec libx264 -s 320x240 -r 25 -b 1200k -acodec libfaac -ar 8k -ab 32k -ac 2 -crf 18 '.$tempFile;
-			//ffmpeg -y -i 21.flv -vcodec libx264 -crf 18 -acodec libfaac -ar 8k -ab 32k -ac 2 -s 320x240 -r 25 21.mp4
 			$command['encodeTempFile'] = 'MP4Box -add '.$tempFile.' '.$destinationFile;
 			
 			$command['removeSourceFile'] = 'rm -f '.$destinationFile.' '.$souceFile;
 			$command['removeTempFile'] = 'rm -f '.$tempFile;
-			
-			$db = Registry::get('db');
-			$environment = Registry::get('environment');
 			
 			$command['mysqlSuccess'] = 'mysql -h '.$db[$environment]['host'].' -u '.$db[$environment]['user'].' -p'.$db[$environment]['pass'].' -D '.$db[$environment]['name'].' -e \'UPDATE `conference` SET `video_converting_status`=1, `video_url`="'.$this->view->get_absolute_url('videos/'.basename($destinationFile)).'" WHERE `id`='.$conferenceId.'\'';
 			$command['mysqlFailed'] = 'mysql -h '.$db[$environment]['host'].' -u '.$db[$environment]['user'].' -p'.$db[$environment]['pass'].' -D '.$db[$environment]['name'].' -e \'UPDATE `conference` SET `video_converting_status`=2, `video_url`="" WHERE `id`='.$conferenceId.'\'';
@@ -42,10 +41,7 @@ class videoController extends Controller {
 			$command['toBackground'] = ' > /dev/null 2>/dev/null &';
 			
 			$output = '(( ('.$command['encodeSourceFile'].' && '.$command['removeSourceFile'].') && ('.$command['encodeTempFile'].' && '.$command['removeTempFile'].') && ('.$command['mysqlSuccess'].') ) || ('.$command['mysqlFailed'].') ) '.$command['toBackground'];
-//			$output = '(('.$command['encodeSourceFile'].' && '.$command['removeSourceFile'].') && ('.$command['encodeTempFile'].' && '.$command['removeTempFile'].')) '.$command['toBackground'];
-
 			file_put_contents(DOCROOT.'logs/video_recordDone.log', $output);
-
 			shell_exec($output);
 		}
 		
