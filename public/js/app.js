@@ -401,7 +401,7 @@ App.conference = {
 						App.conference.playVideo(id, response.status && response.status == 1 ? 1 : 0, response.url);
 					}
 				});
-			}, 20000);
+			}, 10000);
 		}
 		else {
 			var videoId = 'video' + id;
