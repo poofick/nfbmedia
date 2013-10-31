@@ -16,5 +16,4 @@ class videoController extends Controller {
 		
 	}
 	
-	
 }
