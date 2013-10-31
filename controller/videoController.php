@@ -41,8 +41,8 @@ class videoController extends Controller {
 			
 			$command['toBackground'] = ' > /dev/null 2>/dev/null &';
 			
-			$output = shell_exec('(( ('.$command['encodeSourceFile'].' && '.$command['removeSourceFile'].') && ('.$command['encodeTempFile'].' && '.$command['removeTempFile'].') && ('.$command['mysqlSuccess'].') ) || ('.$command['mysqlFailed'].') ) '.$command['toBackground']);
-//			$output = shell_exec('(('.$command['encodeSourceFile'].' && '.$command['removeSourceFile'].') && ('.$command['encodeTempFile'].' && '.$command['removeTempFile'].')) '.$command['toBackground']);
+			$output = '(( ('.$command['encodeSourceFile'].' && '.$command['removeSourceFile'].') && ('.$command['encodeTempFile'].' && '.$command['removeTempFile'].') && ('.$command['mysqlSuccess'].') ) || ('.$command['mysqlFailed'].') ) '.$command['toBackground'];
+//			$output = '(('.$command['encodeSourceFile'].' && '.$command['removeSourceFile'].') && ('.$command['encodeTempFile'].' && '.$command['removeTempFile'].')) '.$command['toBackground'];
 
 			file_put_contents(DOCROOT.'logs/video_recordDone.log', $output);
 
