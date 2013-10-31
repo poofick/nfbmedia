@@ -33,11 +33,11 @@ class videoController extends Controller {
 			$command['removeSourceFile'] = 'rm -f '.$souceFile;
 			$command['removeTempFile'] = 'rm -f '.$tempFile;
 			
-			/*$db = Registry::get('db');
+			$db = Registry::get('db');
 			$environment = Registry::get('environment');
 			
 			$command['mysqlSuccess'] = 'mysql -h '.$db[$environment]['host'].' -u '.$db[$environment]['user'].' -p'.$db[$environment]['pass'].' -e \'UPDATE `conference` SET `video_converting_status`=1 WHERE `id`='.$conferenceId.'\'';
-			$command['mysqlFailed'] = 'mysql -h '.$db[$environment]['host'].' -u '.$db[$environment]['user'].' -p'.$db[$environment]['pass'].' -e \'UPDATE `conference` SET `video_converting_status`=2 WHERE `id`='.$conferenceId.'\'';*/
+			$command['mysqlFailed'] = 'mysql -h '.$db[$environment]['host'].' -u '.$db[$environment]['user'].' -p'.$db[$environment]['pass'].' -e \'UPDATE `conference` SET `video_converting_status`=2 WHERE `id`='.$conferenceId.'\'';
 			
 			$command['toBackground'] = ' > /dev/null 2>/dev/null &';
 			
