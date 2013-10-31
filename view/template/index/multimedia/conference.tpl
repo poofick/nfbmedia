@@ -44,6 +44,7 @@
 						</center>
 					<?php endif; ?>
 				<?php else: ?>	
+					<div id="test"></div>
 					<div id="player" class="player">
 						<div id="video<?php echo $this->conference['id']; ?>" class="video">
 							<div class="status center">
