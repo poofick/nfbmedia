@@ -36,7 +36,7 @@
 				$this->dispatch_data = $dispatch_data;
 			}
 			else {
-				// subdomain
+				// subdomain - ???
 				$this->dispatch_data['subdomain'] = '';
 				
 				// controller / action
@@ -64,7 +64,7 @@
 			self::$view = new View();
 			
 			if($this->dispatch_data['subdomain']) {
-				// subdomain logic
+				// subdomain logic - ???
 			}
 			
 			$controller_name = $this->dispatch_data['controller'].Controller::$controller_suffics;

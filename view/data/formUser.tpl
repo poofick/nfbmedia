@@ -4,12 +4,16 @@
         <tr>
         	<td width="50%">
             	<div class="mtop10"><label for="level">Посада <span class="req">*</span>:</label></div>
-            	<?php $this->render('data/dropdownUserLevels', array('attributes' => array(
-            		'id' => 'level', 
-            		'name' => 'data[level]', 
-            		'class' => 'text mtop5',
-            		'data-element' => 'logicUserLevel'
-            	))); ?>
+            	<?php $this->render('data/dropdownUserLevels', 
+            		array(
+            			'attributes' => array(
+		            		'id' => 'level', 
+		            		'name' => 'data[level]', 
+		            		'class' => 'text mtop5',
+		            		'data-element' => 'logicUserLevel'
+            			)
+            		)
+            	); ?>
             </td>
             <td>
             	<div class="groups mtop10" style="display:none">

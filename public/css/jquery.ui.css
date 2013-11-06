@@ -272,14 +272,17 @@ button.ui-button::-moz-focus-inner {
 }
 .ui-datepicker .ui-datepicker-title select {
 	font-size: 1em;
-	margin: 1px 0;
+	margin: 1px 1px;
+	color: #ccc;
+	background: #4C4C4C;
+	border: none;
 }
 .ui-datepicker select.ui-datepicker-month-year {
 	width: 100%;
 }
 .ui-datepicker select.ui-datepicker-month,
 .ui-datepicker select.ui-datepicker-year {
-	width: 49%;
+	width: 45%;
 }
 .ui-datepicker table {
 	width: 100%;
@@ -809,7 +812,7 @@ body .ui-tooltip {
 }
 .ui-widget-header {
 	border: 1px solid #aaaaaa;
-	background: #cccccc url(../images/ui/ui-bg_highlight-soft_75_cccccc_1x100.png) 50% 50% repeat-x;
+	/*background: #cccccc url(../images/ui/ui-bg_highlight-soft_75_cccccc_1x100.png) 50% 50% repeat-x;*/
 	color: #222222;
 	font-weight: bold;
 }

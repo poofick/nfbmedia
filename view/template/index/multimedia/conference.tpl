@@ -43,6 +43,8 @@
 							<input type="button" id="conferenceOff" value="Закінчити конференцію" class="button red mtop10" style="display:none" data-action="conferenceOff" />
 						</center>
 					<?php endif; ?>
+					
+					<?php $this->render('data/popupCloseConference'); ?>
 				<?php else: ?>	
 					<div id="test"></div>
 					<div id="player" class="player">

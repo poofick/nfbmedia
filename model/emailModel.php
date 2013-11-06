@@ -1,27 +1,29 @@
 <?php
 class emailModel extends Model {
+	public $error_info = '';
+	
 	public function send($params) {
-		$return = array('success' => true);
-		
 		// include classes
 		require_once('../class/phpmailer/class.phpmailer.php');
 		require_once('../class/phpmailer/class.smtp.php');
 		
 		$mail = new phpmailer();
-		$mail->IsSMTP(); // enable SMTP
-	    $mail->SMTPDebug = 0;
+		$mail->IsSMTP();
+	    $mail->SMTPDebug = 1;
 		$mail->SMTPAuth = true;
-//		$mail->SMTPSecure = 'tls';
+		$mail->SMTPSecure = Registry::get('smtp.secure');
 		$mail->Helo = 'nfbmedia.com';
+		$mail->Port = 465; //25, 465 or 587
 		$mail->Host = Registry::get('smtp.host');
-		$mail->Port = 25; //25, 465 or 587
 		$mail->Username = Registry::get('smtp.user');  
 		$mail->Password = Registry::get('smtp.pass');
 		
 	    $mail->SetFrom(isset($params['from']) ? $params['from'] : 'noreply@nfbmedia.com', isset($params['from_name']) ? $params['from_name'] : 'НФБ МЕДІА');
 		if(isset($params['address']) && is_array($params['address'])) {
 			foreach($params['address'] as $address) {
-				$mail->AddAddress($address);
+				if(filter_var($address, FILTER_VALIDATE_EMAIL)) {
+					$mail->AddAddress($address);
+				}
 			}
 		}
 				
@@ -44,12 +46,15 @@ class emailModel extends Model {
 			}
 		}
 		
-		return true;
-		
-		/*if(!@$mail->Send()) {
-			$return = array('success' => false, 'error' =>  $mail->ErrorInfo);
+		if(!@$mail->Send()) {
+			$this->error_info = $mail->ErrorInfo;
+			return false;
 		}
 		
-		return $return;*/
+		return true;
+	}
+	
+	public function get_error_info() {
+		return $this->error_info;
 	}
 }

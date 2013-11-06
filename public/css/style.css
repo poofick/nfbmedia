@@ -1,5 +1,5 @@
 *{margin:0px;padding:0px}
-
+html { overflow-y: scroll }
 html, body{color:#fff;background:#6A6A6A url(../images/noise.png);font-size:13px;line-height:16px;font-family:"PT Sans Narrow","PT Sans","Arial Narrow",Verdana,Geneva,sans-serif;font-size:13px;min-height:100%}
 
 .gradient{filter:none}

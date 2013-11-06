@@ -6,11 +6,19 @@
 		const USER_LEVEL_REGIONAL_DIRECTOR = 3;
 		const USER_LEVEL_CUSTOMER = 4;
 		
+		const USER_GENDER_MALE = 1;
+		const USER_GENDER_FEMALE = 2;
+		
 		public static $levels = array(
 			self::USER_LEVEL_ROOT  => 'Адміністратор',
 			self::USER_LEVEL_GENERAL_DIRECTOR => 'Генеральний директор',
 			self::USER_LEVEL_REGIONAL_DIRECTOR => 'Регіональний директор',
 			self::USER_LEVEL_CUSTOMER => 'Менеджер'
+		);
+		
+		public static $genders = array(
+			self::USER_GENDER_MALE => 'Чоловік',
+			self::USER_GENDER_FEMALE => 'Жінка',
 		);
                 
         const USER_SESSION_KEY = 'usession';
@@ -91,6 +99,14 @@
 		
 		public function update_profile($id, $data) {
 			
+			$userAttachmentModel = new userAttachmentModel();
+			
+			// creted upload data
+			if(isset($data['upload']) && !empty($data['upload'])) {
+				$upload_data = $data['upload'];
+				unset($data['upload']);
+			}
+			
 			// add password + password key
 			if(strlen($data['password'])) {
 				$data = array_merge($data, functionsModel::crypt_password($data['password']));
@@ -100,7 +116,22 @@
 			}
 			
 			// edit
-			return parent::edit($id, $data);
+			if(parent::edit($id, $data)) {
+				// remove old upload data
+				$userAttachmentModel->delete_all_by(array('user_id' => $id));
+				
+				// add new upload data
+				if(isset($upload_data)) {
+					foreach($upload_data as $upload) {
+						$upload['user_id'] = $id;
+						$userAttachmentModel->add($upload);
+					}
+				}
+				
+				return true;
+			}
+			
+			return false;
 			
 		}
 		

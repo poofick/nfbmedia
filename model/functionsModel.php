@@ -52,4 +52,11 @@
 			
 		}
 		
+		static function rdate($format, $timestamp = false) {
+			$timestamp = $timestamp == false ? time() : $timestamp;
+			
+			$monthNamesUA = array('Січня', 'Лютого', 'Березня', 'Квітня', 'Травня', 'Червня', 'Липня', 'Серпня', 'Вересня', 'Жовтня', 'Листопада', 'Грудня');
+			return date(strpos($format, 'M') === false ? $format : str_replace('M', $monthNamesUA[date('n', $timestamp) - 1], $format), $timestamp);
+		}
+		
 	}

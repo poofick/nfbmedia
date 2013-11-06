@@ -139,10 +139,26 @@
 		
 		public function delete($id) { 
 			
-//			$this->prepare_execute('DELETE FROM `'.static::$use.'` WHERE `id`=:id LIMIT 1', array(':id' => $id));
 			$this->prepare_execute('UPDATE `'.static::$use.'` SET `deleted`=NOW() WHERE `id`=:id LIMIT 1', array(':id' => $id));
 			return true;
 			
+		}
+		
+		public function delete_all_by($filter = array()) { 
+			
+			$where = array();
+			if(!empty($filter)) {
+				foreach($filter as $k => $v) {
+					$where[] = '`'.$k.'`=:'.$k;
+				}
+			}
+			
+			if(!empty($where)) {
+				$this->prepare_execute('UPDATE `'.static::$use.'` SET `deleted`=NOW() WHERE '.implode(' AND ', $where), $this->prepare_data($filter));
+			}
+			
+			return true;
+				
 		}
 		
 		public function find($id, $fields = array()) { 

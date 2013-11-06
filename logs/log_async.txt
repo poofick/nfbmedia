@@ -1,0 +1,28 @@
+Array
+(
+    [environment] => development
+    [subdomain] => 
+    [controller] => async
+    [action] => email
+    [request] => Array
+        (
+            [address] => Array
+                (
+                    [0] => as@zt.com
+                    [1] => nick.diesel.1984@gmail.com
+                )
+
+            [subject] => Нове повідомлення
+            [body] => Шановний, Кондратюк Антоніна.
+Ви отримали нове повідомлення.
+
+Тема: тест
+Текст повідомлення: 
+тест
+
+Відправник: Петрук Тарас.
+
+З повагою, НФБ МЕДІА.
+        )
+
+)

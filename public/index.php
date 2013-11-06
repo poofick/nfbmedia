@@ -6,8 +6,6 @@ date_default_timezone_set('Europe/London');
 
 require_once('../autoload.php');
 
-//echo $dddd;
-
 Registry::get_ini_file('../config/config.ini');
 
 $app = new App(getenv('environment'));

@@ -90,6 +90,7 @@ App.log = function(v) {
 
 App.dialog = {
 	isVisible: false,
+	
     open: function(content) {
     	if(!this.isVisible && content && content.toString().length) {
     		this.isVisible = true;
@@ -352,6 +353,9 @@ App.conference = {
 				
 				// show status
 				$('#player .status').html('Конференцію завершено');
+				
+				// show popup
+				App.dialog.open($('#closeConference').html());
 				
 				// stop
 				var type = this.user.isPublisher ? 'publish' : 'play';
@@ -617,8 +621,8 @@ App.actions = {
 	redirect: function($this, data) {
 		if(data.url)
 			document.location = data.url;
-		else
-			alert('Url is missing...');
+			
+		App.dialog.close();	
 	},
 	
 	preloadContent: function($this, data) {
@@ -988,8 +992,19 @@ App.elements = {
 		});
 	},
 	
-	datepicker: function($this, data) {
-		$this.datetimepicker();
+	datetimepicker: function($this, data) {
+		if(data.type == 'date')	{
+			$this.datepicker({
+				changeMonth: true,
+				changeYear: true
+			});
+		}
+		else if(data.type == 'time') {
+			$this.timepicker();	
+		}
+		else {
+			$this.datetimepicker();	
+		}
 	},
 	
 	tooltip: function($this, data) {

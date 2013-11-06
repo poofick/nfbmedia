@@ -45,7 +45,7 @@
 							        <tr>
 							            <td>
 							            	<div class="mtop10">Час проведення <span class="req">*</span></div>
-							            	<input type="text" id="estimated_start_time" name="data[estimated_start_time]" value="<?php echo date('Y-m-d H:i'); ?>" readonly="readonly" data-element="datepicker" class="text center pointer mtop5" />
+							            	<input type="text" id="estimated_start_time" name="data[estimated_start_time]" value="<?php echo date('Y-m-d H:i'); ?>" readonly="readonly" data-element="datetimepicker" class="text center pointer mtop5" />
 							            </td>
 							            <td>
 							            	<div class="mtop10">Тривалість (хв) <span class="req">*</span></div>

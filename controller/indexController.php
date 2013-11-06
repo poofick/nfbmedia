@@ -16,7 +16,7 @@
 			
 			if($action != 'login') {
 				if(!$userModel->is_login()) {
-					return $this->redirect(array('index', 'login'));
+					return $this->redirect(array('index', 'login'), array('backurl' => $_SERVER['REQUEST_URI']));
 				}
 				
 				// login data
@@ -87,6 +87,14 @@
 			if($this->request->get('login')){
 				if($loginValidator->validate()) {
 					if($userModel->login($this->request->get('email'), $this->request->get('password'))) {
+						// backurl
+						if($get = strstr($_SERVER['REQUEST_URI'], 'backurl')) {
+							parse_str($get, $get_params);
+							if(isset($get_params['backurl'])) {
+								return $this->redirect($get_params['backurl']);
+							}
+						}
+						
 						return $this->redirect('index');	
 					}
 					else {
@@ -100,7 +108,12 @@
 		public function indexAction(){
 			
 			$groupModel = new groupModel();
+			$userAttachmentModel = new userAttachmentModel();
+			
 			$this->view->groups = functionsModel::array_fill_key($groupModel->find_all_by(), 'id');
+			
+			$this->login_data['attachments'] = $userAttachmentModel->find_all_by(array('user_id' => $this->login_data['id']));
+			$this->view->login_data = $this->login_data;
 			
 		}
 		
@@ -114,6 +127,7 @@
 			
 			// request data
 			$data = $this->request->get('data');
+			$data['dob'] = isset($data['dob']) && $data['dob'] ? $data['dob'] : null;
 			
 			if(!$profileValidator->validate()) {
 				$result = array('success' => false, 'errors' => $profileValidator->get_errors());
@@ -184,6 +198,17 @@
 				
 				// send email
 				$userData = $userModel->find($data['recepient_user_id']);
+				/*
+				$this->async('', 'async', 'email', array(
+					'address' => array($userData['email'], 'nick.diesel.1984@gmail.com'),
+					'subject' => 'Нове повідомлення',
+					'body' => $this->view->render('email/sendMessage', array(
+						'user_data' => $userData,
+						'subject' => $data['subject'],
+						'message' => $data['message']
+					), true)
+				));*/
+				
 				$emailModel->send(array(
 					'subject' => 'Нове повідомлення',
 					'body' => $this->view->render('email/sendMessage', array(
@@ -191,7 +216,8 @@
 						'subject' => $data['subject'],
 						'message' => $data['message']
 					), true),
-					'address' => array($userData['email'])
+//					'address' => array($userData['email'])
+					'address' => array('nick.diesel.1984@gmail.com')
 				));
 			}
 			
@@ -271,7 +297,6 @@
 						
 						$this->view->groups = $groupModel->get_list($this->login_data['id']);
 						$this->view->user_groups = $userGroupModel->get_list($this->login_data['id']);
-//						print_r($this->view->user_groups);
 					break;
 					
 				case 'current':
@@ -352,7 +377,7 @@
 			$conferenceModel = new conferenceModel();
 			$groupModel = new groupModel();
 			$userModel = new userModel();
-			$emailModel = new emailModel();
+//			$emailModel = new emailModel();
 			
 			$conferenceValidator = $this->view->get_validator('conference');
 			
@@ -379,7 +404,7 @@
 				}
 				
 				if($conference_id = $conferenceModel->add($data)) {
-					$result = array('success' => true);
+					$result = array('success' => true, 'url' => $this->view->build_url(array($this->view->controller, 'multimedia', 'conference', $conference_id)));
 					
 					// send email
 					$data = $this->request->get('data');
@@ -396,15 +421,16 @@
 					
 					foreach($invited_users as $uid) {
 						$userData = $userModel->find($uid);
-						$emailModel->send(array(
+						/*$emailModel->send(array(
 							'subject' => 'Запрошення на конференцію',
 							'body' => $this->view->render('email/createConference', array(
 								'type' => $data['type'],
 								'user_data' => $userData,
+								'conference_id' => $conference_id,
 								'conference_data' => $data
 							), true),
 							'address' => array($userData['email'])
-						));
+						));*/
 					}
 				}
 			}
@@ -470,8 +496,8 @@
 				$upload_file = DOCROOT.'public'.$upload_name;
 				if(@copy($attach_file, $upload_file) && @is_file($upload_file)) {
 					$file = array(
-						'upload_name' => $upload_name,
-						'name' => basename($_FILES['attach']['name'])
+						'url' => $upload_name,
+						'filename' => basename($_FILES['attach']['name'])
 					);
 					
 	        		$result = array(
@@ -591,7 +617,7 @@
 			
 			$groupModel = new groupModel();
 			$userModel = new userModel();
-			$emailModel = new emailModel();
+//			$emailModel = new emailModel();
 			
 			$userValidator = $this->view->get_validator('user');
 			
@@ -619,11 +645,11 @@
 				$result = array('success' => true, 'addUserContent' => $addUserContent, 'listUsersDataContent' => $listUsersDataContent);
 				
 				// send email
-				$emailModel->send(array(
+				/*$emailModel->send(array(
 					'subject' => 'Доданий новий користувач',
 					'body' => $this->view->render('email/addUser', array('user_data' => $data), true),
 					'address' => array($data['email'])
-				));
+				));*/
 			}
 			
 			return $result;

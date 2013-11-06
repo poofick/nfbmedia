@@ -1,7 +1,7 @@
 <h1>Активні конференції</h1>
 <div class="double-line"></div>
 
-<table class="table" cellpadding="0" cellspacing="0">
+<table class="table mtop10" cellpadding="0" cellspacing="0">
 	<tr>
 		<th>Назва</th>
 		<th>Група</th>
@@ -15,7 +15,7 @@
 				<td><?php echo $conference['title']; ?></td>
 				<td align="center"><?php echo isset($this->conference_groups[$conference['group_id']]) ? $this->conference_groups[$conference['group_id']]['title'] : ''; ?></td>
 				<td align="center"><?php echo (strtotime($conference['estimated_end_time']) - strtotime($conference['estimated_start_time']))/60; ?></td>
-				<td align="center"><?php echo date('Y-m-d H:i', strtotime($conference['estimated_start_time'])); ?></td>
+				<td align="center"><?php echo functionsModel::rdate('d M Y H:i', strtotime($conference['estimated_start_time'])); ?></td>
 				<td align="center">
 					<?php if($conference['status'] != conferenceModel::CONFERENCE_STATUS_OFF): ?>
 						<input type="button" value="Приєднатися" class="button blue" onclick="document.location='<?php echo $this->build_url(array($this->controller, 'multimedia', 'conference', $conference['id'])); ?>'" />

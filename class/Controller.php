@@ -28,16 +28,21 @@
 			
 		}
 		
-		/*public function async($subdomain, $controller, $action, $request = array()) {
+		public function async($subdomain, $controller, $action, $request = array()) {
 			
-			shell_exec('php -f '.DOCROOT.'private/async.php '.base64_encode(serialize(array(
+			$command = 'php -f '.DOCROOT.'private/async.php '.base64_encode(serialize(array(
+				'environment' => Registry::get('environment'),
 				'subdomain' => (string)$subdomain,
 				'controller' => (string)$controller,
 				'action' => (string)$action,
 				'request' => (array)$request
-			))).' > /dev/null 2>/dev/null &');
+			))).' > /dev/null 2>/dev/null &';
 			
-		}*/
+			die($command);
+			
+			shell_exec($command);
+			
+		}
 		
 		public function redirect($path, $query = false) {
 			
