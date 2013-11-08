@@ -13,7 +13,7 @@ class emailModel extends Model {
 		$mail->SMTPAuth = true;
 		$mail->SMTPSecure = Registry::get('smtp.secure');
 		$mail->Helo = 'nfbmedia.com';
-		$mail->Port = 465; //25, 465 or 587
+		$mail->Port = 25; //25, 465 or 587
 		$mail->Host = Registry::get('smtp.host');
 		$mail->Username = Registry::get('smtp.user');  
 		$mail->Password = Registry::get('smtp.pass');
