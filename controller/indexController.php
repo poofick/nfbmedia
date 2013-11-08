@@ -217,7 +217,7 @@
 						'message' => $data['message']
 					), true),
 //					'address' => array($userData['email'])
-					'address' => array('nick.diesel.1984@gmail.com')
+					'address' => array('taras.zakrevskiy@gmail.com')
 				));
 			}
 			
