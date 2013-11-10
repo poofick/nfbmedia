@@ -91,13 +91,14 @@
 		public function get_absolute_url($path, $query = null) {
 			
 			$environment = Registry::get('environment');
-			$brand = Registry::get('brand');
 			$domain = Registry::get(array('domain', $environment));
+			
+			$subdomain = Registry::get(array('dispatch_data', 'subdomain'));
 			
 			$path = (is_string($path) ? $path : (is_array($path) && !empty($path) ? implode('/', $path)  : ''));
 			$query = ($query !== null ? (is_string($query) && strlen($query) ? $query : (is_array($query) && !empty($query) ? http_build_query($query) : '')) : '');
 			
-			return 'http://'.($brand ? $brand['subdomain'].'.' : '').$domain.'/'.$path.($query ? '?'.$query : '');
+			return 'http://'.($subdomain ? $subdomain.'.' : '').$domain.'/'.$path.($query ? '?'.$query : '');
 			
 		}
 		

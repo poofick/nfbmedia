@@ -8,6 +8,6 @@
 Дата проведення: <?php echo functionsModel::rdate('d M Y', strtotime($conference_data['estimated_start_time'])); ?>.
 Тривалість: <?php echo $conference_data['estimated_duration']; ?> хв.
 
-Щоб залучитися до конференції, перейдіть за посиланням <?php echo $this->build_url(array($this->controller, 'multimedia', 'conference', $conference_id)); ?>
+Щоб залучитися до конференції, перейдіть за посиланням <?php echo $this->get_absolute_url(array($this->controller, 'multimedia', 'conference', $conference_id)); ?>
 
 З повагою, НФБ МЕДІА.

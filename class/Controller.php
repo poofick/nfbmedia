@@ -38,8 +38,6 @@
 				'request' => (array)$request
 			))).' > /dev/null 2>/dev/null &';
 			
-			die($command);
-			
 			shell_exec($command);
 			
 		}

@@ -7,16 +7,19 @@ class emailModel extends Model {
 		require_once('../class/phpmailer/class.phpmailer.php');
 		require_once('../class/phpmailer/class.smtp.php');
 		
+		$environment = Registry::get('environment');
+		$email = Registry::get(array('email', $environment));
+		
 		$mail = new phpmailer();
 		$mail->IsSMTP();
 	    $mail->SMTPDebug = 1;
 		$mail->SMTPAuth = true;
-		$mail->SMTPSecure = Registry::get('smtp.secure');
+		$mail->SMTPSecure = $email['smtp']['secure'];
 		$mail->Helo = 'nfbmedia.com';
 		$mail->Port = 25; //25, 465 or 587
-		$mail->Host = Registry::get('smtp.host');
-		$mail->Username = Registry::get('smtp.user');  
-		$mail->Password = Registry::get('smtp.pass');
+		$mail->Host = $email['smtp']['host'];
+		$mail->Username = $email['smtp']['user'];  
+		$mail->Password = $email['smtp']['pass'];
 		
 	    $mail->SetFrom(isset($params['from']) ? $params['from'] : 'noreply@nfbmedia.com', isset($params['from_name']) ? $params['from_name'] : 'НФБ МЕДІА');
 		if(isset($params['address']) && is_array($params['address'])) {

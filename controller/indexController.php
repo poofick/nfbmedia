@@ -16,7 +16,7 @@
 			
 			if($action != 'login') {
 				if(!$userModel->is_login()) {
-					return $this->redirect(array('index', 'login'), array('backurl' => $_SERVER['REQUEST_URI']));
+					return $this->redirect(array('index', 'login'), $_SERVER['REQUEST_URI'] !== '/' ? array('backurl' => $_SERVER['REQUEST_URI']) : array());
 				}
 				
 				// login data
@@ -167,7 +167,6 @@
 			
 			$messageModel = new messageModel();
 			$userModel = new userModel();
-			$emailModel = new emailModel();
 			
 			$messageValidator = $this->view->get_validator('message');
 			
@@ -198,26 +197,14 @@
 				
 				// send email
 				$userData = $userModel->find($data['recepient_user_id']);
-				/*
 				$this->async('', 'async', 'email', array(
-					'address' => array($userData['email'], 'nick.diesel.1984@gmail.com'),
+					'address' => array($userData['email']),
 					'subject' => 'Нове повідомлення',
 					'body' => $this->view->render('email/sendMessage', array(
 						'user_data' => $userData,
 						'subject' => $data['subject'],
 						'message' => $data['message']
 					), true)
-				));*/
-				
-				$emailModel->send(array(
-					'subject' => 'Нове повідомлення',
-					'body' => $this->view->render('email/sendMessage', array(
-						'user_data' => $userData,
-						'subject' => $data['subject'],
-						'message' => $data['message']
-					), true),
-//					'address' => array($userData['email'])
-					'address' => array('taras.zakrevskiy@gmail.com')
 				));
 			}
 			
@@ -377,7 +364,6 @@
 			$conferenceModel = new conferenceModel();
 			$groupModel = new groupModel();
 			$userModel = new userModel();
-//			$emailModel = new emailModel();
 			
 			$conferenceValidator = $this->view->get_validator('conference');
 			
@@ -419,18 +405,19 @@
 						$invited_users = $data['invited_users'];
 					}
 					
+					// send email
 					foreach($invited_users as $uid) {
 						$userData = $userModel->find($uid);
-						/*$emailModel->send(array(
+						$this->async('', 'async', 'email', array(
+							'address' => array($userData['email']),
 							'subject' => 'Запрошення на конференцію',
 							'body' => $this->view->render('email/createConference', array(
 								'type' => $data['type'],
 								'user_data' => $userData,
 								'conference_id' => $conference_id,
 								'conference_data' => $data
-							), true),
-							'address' => array($userData['email'])
-						));*/
+							), true)
+						));
 					}
 				}
 			}
@@ -617,7 +604,6 @@
 			
 			$groupModel = new groupModel();
 			$userModel = new userModel();
-//			$emailModel = new emailModel();
 			
 			$userValidator = $this->view->get_validator('user');
 			
@@ -645,11 +631,11 @@
 				$result = array('success' => true, 'addUserContent' => $addUserContent, 'listUsersDataContent' => $listUsersDataContent);
 				
 				// send email
-				/*$emailModel->send(array(
+				$this->async('', 'async', 'email', array(
+					'address' => array($data['email']),
 					'subject' => 'Доданий новий користувач',
-					'body' => $this->view->render('email/addUser', array('user_data' => $data), true),
-					'address' => array($data['email'])
-				));*/
+					'body' => $this->view->render('email/addUser', array('user_data' => $data), true)
+				));
 			}
 			
 			return $result;

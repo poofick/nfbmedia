@@ -9,6 +9,6 @@
 
 Відправник: <?php echo $this->login_data['last_name'].' '.$this->login_data['first_name']; ?>.
 
-Щоб відповісти на дане повідомлення, перейдіть за посиланням <?php echo $this->build_url(array($this->controller, 'messages')); ?>
+Щоб відповісти на дане повідомлення, перейдіть за посиланням <?php echo $this->get_absolute_url(array($this->controller, 'messages')); ?>
 
 З повагою, НФБ МЕДІА.
