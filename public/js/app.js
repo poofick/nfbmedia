@@ -161,7 +161,11 @@ App.dialog = {
 };
 
 App.ajax = {
+    processing: false,
     request: function( options ) {
+	if( App.ajax.processing ) return false;
+	App.ajax.processing = true;
+	
         options = $.extend({}, {type: 'post', dataType:'json', data:{}}, options);
         options.url = App.config.appDir ? '/' + App.config.appDir + (options.url ? options.url : '/') : (options.url ? options.url : '/');
         
@@ -186,6 +190,7 @@ App.ajax = {
             
 			
 			$('[data-element]').each(initElements);
+			App.ajax.processing = false;
             
         });
     }
