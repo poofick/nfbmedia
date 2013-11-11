@@ -686,6 +686,12 @@ App.actions = {
 			
 			$error.html('').hide();
 			
+			var level = $form.find('[name="data[level]"]').val();
+			if(level == 2) { // general director
+				$form.find('[name="data[group_id]"]').attr('disabled', 'disabled');
+				$form.find('[name="data[group_title]"]').attr('disabled', 'disabled');
+			}
+			
 			App.ajax.request({
 				url: $form.attr('action'),
 				data: $form.serialize(),

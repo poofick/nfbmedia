@@ -615,6 +615,11 @@
 			$data = $this->request->get('data');
 			$data['creator_id'] = $this->login_data['id'];
 			
+			/*if($data['level'] == userModel::USER_LEVEL_GENERAL_DIRECTOR) {
+				unset($data['group_id']);
+				unset($data['group_title']);
+			}*/
+			
 			if(!$userValidator->validate()) {
 				$result = array('success' => false, 'errors' => $userValidator->get_errors());
 			}
