@@ -25,9 +25,9 @@ class asyncController extends Controller {
 		$amazonModel = new amazonModel();
 		$conferenceModel = new conferenceModel();
 		
-		file_put_contents(DOCROOT.'logs/video_copyToAmazon.log', print_r($params, true));
-		
 		if(($params = $this->request->get_all())) {
+			file_put_contents(DOCROOT.'logs/video_copyToAmazon.log', print_r($params, true));
+			
 			$conferenceId = isset($params['conferenceId']) && $params['conferenceId'] > 0 ? (int)$params['conferenceId'] : 0;
 			$inputFile = isset($params['inputFile']) && @is_file($params['inputFile']) ? $params['inputFile'] : false;
 			

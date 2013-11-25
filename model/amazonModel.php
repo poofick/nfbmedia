@@ -26,7 +26,7 @@
 		public function putFileToS3($type, $file, $flDelete = false, $acl = self::AMAZON_S3_ACL_PUBLIC) {
 			
 			// AMAZON PHP LIB
-			include_once(DOCROOT.'class/php-lib/AmazonWebServices.phar');
+			include_once(DOCROOT.'class/AmazonWebServices.phar');
 			
 			$success = false;
 			
