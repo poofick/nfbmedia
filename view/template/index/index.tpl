@@ -63,7 +63,8 @@
 		        <tr>
 		            <td colspan="3" data-element="multiuploader">
 		            	<div class="mtop10">
-		            		Завантажити файли: <input type="file" name="attach" data-url="<?php echo $this->build_url(array($this->controller, 'uploadattachfile')); ?>" multiple />
+		            		Додаткові матеріали: <br />
+		            		<input type="file" name="attach" data-url="<?php echo $this->build_url(array($this->controller, 'uploadattachfile')); ?>" multiple />
 		            	</div>
 			            <div class="files">
 			            	<?php if($this->login_data['attachments']): ?>

@@ -38,9 +38,21 @@ class videoController extends Controller {
 			$command['mysqlSuccess'] = 'mysql -h '.$db[$environment]['host'].' -u '.$db[$environment]['user'].' -p'.$db[$environment]['pass'].' -D '.$db[$environment]['name'].' -e \'UPDATE `conference` SET `video_converting_status`=1, `video_url`="'.$this->view->get_absolute_url('videos/'.basename($destinationFile)).'" WHERE `id`='.$conferenceId.'\'';
 			$command['mysqlFailed'] = 'mysql -h '.$db[$environment]['host'].' -u '.$db[$environment]['user'].' -p'.$db[$environment]['pass'].' -D '.$db[$environment]['name'].' -e \'UPDATE `conference` SET `video_converting_status`=2, `video_url`="" WHERE `id`='.$conferenceId.'\'';
 			
+			$command['copyToAmazon'] = 'php -f private/async.php '.base64_encode(serialize(array(
+				'environment' => $environment,
+				'subdomain' => '',
+				'controller' => 'async',
+				'action' => 'copyToAmazon',
+				'request' => array(
+					'conferenceId' => $conferenceId,
+					'inputFile' => $destinationFile
+//					'deleteFlag' => 0
+				)
+			)));
+			
 			$command['toBackground'] = ' > /dev/null 2>/dev/null &';
 			
-			$output = '(( ('.$command['encodeSourceFile'].' && '.$command['removeSourceFile'].') && ('.$command['encodeTempFile'].' && '.$command['removeTempFile'].') && ('.$command['mysqlSuccess'].') ) || ('.$command['mysqlFailed'].') ) '.$command['toBackground'];
+			$output = '(( ('.$command['encodeSourceFile'].' && '.$command['removeSourceFile'].') && ('.$command['encodeTempFile'].' && '.$command['removeTempFile'].') && ('.$command['mysqlSuccess'].') && ('.$command['copyToAmazon'].') ) || ('.$command['mysqlFailed'].') ) '.$command['toBackground'];
 			file_put_contents(DOCROOT.'logs/video_recordDone.log', $output);
 			shell_exec($output);
 		}

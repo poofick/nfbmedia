@@ -36,11 +36,11 @@
 		<div id="header" class="gradient">
 			<div class="wrapper">
 				<ul class="nav">
-					<li><a href="/<?php echo Registry::get('dir.relative.app'); ?>" <?php if($this->action == 'index'): ?>class="sel"<?php endif; ?>>Мій профайл</a></li>
-					<li><a href="/<?php echo Registry::get('dir.relative.app').$this->controller.'/'; ?>messages" <?php if($this->action == 'messages'): ?>class="sel"<?php endif; ?>>Повідомлення</a></li>
-					<li><a href="/<?php echo Registry::get('dir.relative.app').$this->controller.'/'; ?>multimedia" <?php if($this->action == 'multimedia'): ?>class="sel"<?php endif; ?>>Мультимедіа</a></li>
-					<li><a href="/<?php echo Registry::get('dir.relative.app').$this->controller.'/'; ?>customers" <?php if($this->action == 'customers'): ?>class="sel"<?php endif; ?>>Співробітники</a></li>
-					<li><a href="/<?php echo Registry::get('dir.relative.app').$this->controller.'/'; ?>login" class="right">Вихід</a></li>
+					<li class="profile"><a href="/<?php echo Registry::get('dir.relative.app'); ?>" <?php if($this->action == 'index'): ?>class="sel"<?php endif; ?>>Мій профайл</a></li>
+					<li class="messages"><a href="/<?php echo Registry::get('dir.relative.app').$this->controller.'/'; ?>messages" <?php if($this->action == 'messages'): ?>class="sel"<?php endif; ?>>Повідомлення</a></li>
+					<li class="multimedia"><a href="/<?php echo Registry::get('dir.relative.app').$this->controller.'/'; ?>multimedia" <?php if($this->action == 'multimedia'): ?>class="sel"<?php endif; ?>>Мультимедіа</a></li>
+					<li class="customers"><a href="/<?php echo Registry::get('dir.relative.app').$this->controller.'/'; ?>customers" <?php if($this->action == 'customers'): ?>class="sel"<?php endif; ?>>Співробітники</a></li>
+					<li class="logout"><a href="/<?php echo Registry::get('dir.relative.app').$this->controller.'/'; ?>login" class="right">Вихід</a></li>
 				</ul>
 			</div>
 		</div>
