@@ -36,7 +36,7 @@
 			switch($type)
 			{
 				case 'video':
-								$s3_key = $environment.'/'.Registry::get('amazon.s3.dir.videos').'/'.basename($file);
+								$s3_key = $environment.'/'.Registry::get('amazon.s3.dir.videos').basename($file);
 					break;
 					
 				default: 
@@ -47,10 +47,17 @@
 			if(isset($s3_key) && @is_file($file))	{
 				
 //				var_dump(Registry::get('amazon.access_key_id'), Registry::get('amazon.secret_access'));
-				echo $bucket;
+//				echo $bucket;
 				
 				// create client
 				$clientS3 =  Aws\S3\S3Client::factory(array('key' => Registry::get('amazon.access_key_id'), 'secret' => Registry::get('amazon.secret_access')));
+				
+				var_dump(array(
+				    'Bucket'     	=> $bucket,
+				    'Key'        	=> $s3_key,
+				    'SourceFile' 	=> $file,
+				    'ACL'			=> $acl
+				));
 			
 				// delete old S3 file
 				$clientS3->deleteObject(array(

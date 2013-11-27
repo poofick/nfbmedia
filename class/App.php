@@ -124,7 +124,7 @@
 		
 		static function close() {
 			
-			Session::close();
+//			Session::close();
 			die();
 			
 		}
