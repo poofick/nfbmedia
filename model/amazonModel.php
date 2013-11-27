@@ -11,7 +11,7 @@
 			
 			switch($type) {
 				case 'video': 
-								$s3_key = $environment.'/'.Registry::get('amazon.s3.dir.videos').'/'.$key;
+								$s3_key = $environment.'/'.Registry::get('amazon.s3.dir.videos').$key;
 					break;
 			}
 			

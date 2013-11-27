@@ -415,7 +415,7 @@ App.conference = {
 		else if(url) {
 			var videoId = 'video' + id;
 			$('#' + videoId).empty();
-			$f(videoId, '/swf/flowplayer-3.2.16.swf', url);
+			$f(videoId, '/swf/flowplayer-3.2.16.swf', 'http:' + url);
 			// this.createSwfObject(videoId, {src: url});
 		}
 	},

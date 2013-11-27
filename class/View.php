@@ -98,7 +98,7 @@
 			$path = (is_string($path) ? $path : (is_array($path) && !empty($path) ? implode('/', $path)  : ''));
 			$query = ($query !== null ? (is_string($query) && strlen($query) ? $query : (is_array($query) && !empty($query) ? http_build_query($query) : '')) : '');
 			
-			return 'http://'.($subdomain ? $subdomain.'.' : '').$domain.'/'.$path.($query ? '?'.$query : '');
+			return '//'.($subdomain ? $subdomain.'.' : '').$domain.'/'.$path.($query ? '?'.$query : '');
 			
 		}
 		
