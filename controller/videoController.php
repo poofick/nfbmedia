@@ -38,7 +38,7 @@ class videoController extends Controller {
 			$command['mysqlSuccess'] = 'mysql -h '.$db[$environment]['host'].' -u '.$db[$environment]['user'].' -p'.$db[$environment]['pass'].' -D '.$db[$environment]['name'].' -e \'UPDATE `conference` SET `video_converting_status`=1, `video_url`="'.$this->view->get_absolute_url('videos/'.basename($destinationFile)).'" WHERE `id`='.$conferenceId.'\'';
 			$command['mysqlFailed'] = 'mysql -h '.$db[$environment]['host'].' -u '.$db[$environment]['user'].' -p'.$db[$environment]['pass'].' -D '.$db[$environment]['name'].' -e \'UPDATE `conference` SET `video_converting_status`=2, `video_url`="" WHERE `id`='.$conferenceId.'\'';
 			
-			$command['copyToAmazon'] = 'php -f private/async.php '.base64_encode(serialize(array(
+			$command['copyToAmazon'] = 'php -f '.DOCROOT.'private/async.php '.base64_encode(serialize(array(
 				'environment' => $environment,
 				'subdomain' => '',
 				'controller' => 'async',
